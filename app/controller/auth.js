@@ -2,7 +2,7 @@
 
 module.exports = app => {
     class Auth extends app.Controller {
-        async login() {
+        async login(ctx) {
         }
     }
     return Auth;
