@@ -7,15 +7,16 @@ module.exports = appInfo => {
   config.keys = appInfo.name + "_1501817502166_7037";
 
   // add your config here
-  config.mysql = {
-    client: {
-      host: "localhost",
-      port: "3306",
-      user: "",
-      passsword: "",
-      database: "mysql"
-    }
-  };
 
   return config;
+};
+
+module.exports.mysql = {
+  client: {
+    host: "localhost",
+    port: "3306",
+    user: "",
+    passsword: "",
+    database: "mysql"
+  }
 };
