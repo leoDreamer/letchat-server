@@ -1,5 +1,6 @@
 "use strict";
 
+const database = "egg";
 module.exports = appInfo => {
   const config = {};
 
@@ -7,16 +8,24 @@ module.exports = appInfo => {
   config.keys = appInfo.name + "_1501817502166_7037";
 
   // add your config here
+  config.mysql = {
+    client: {
+      host: "localhost",
+      port: "3306",
+      user: "root",
+      passsword: "",
+      database: database
+    }
+  };
 
-  return config;
-};
-
-module.exports.mysql = {
-  client: {
+  config.sequelize = {
+    dialect: "mysql", // db type
+    database: database,
     host: "localhost",
     port: "3306",
-    user: "",
-    passsword: "",
-    database: "mysql"
-  }
+    username: "root",
+    password: ""
+  };
+
+  return config;
 };

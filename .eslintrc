@@ -21,7 +21,8 @@
 		"spyOn": true,
 		"xit": true,
 		"Buffer": true,
-		"exports": true
+		"exports": true,
+		"process": true
 	},	
 	"parser": "babel-eslint",
 	"parserOptions": {

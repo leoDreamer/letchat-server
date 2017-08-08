@@ -15,7 +15,10 @@
     "eslint": "^3.19.0",
     "eslint-config-egg": "^4.2.0",
     "webstorm-disable-index": "^1.2.0",
-    "egg-mysql": "^3.0.0"
+    "egg-mysql": "^3.0.0",
+    "egg-validate": "^1.0.0",
+    "egg-sequelize": "^3.1.0",
+    "mysql2": "^1.4.0"
   },
   "engines": {
     "node": ">=6.0.0"
@@ -28,7 +31,10 @@
     "cov": "egg-bin cov",
     "lint": "eslint .",
     "ci": "npm run lint && npm run cov",
-    "autod": "autod"
+    "autod": "autod",
+    "migrate:new": "egg-sequelize migration:create",
+    "migrate:up": "egg-sequelize db:migrate",
+    "migrate:down": "egg-sequelize db:migrate:undo"
   },
   "ci": {
     "version": "6, 8"
@@ -37,6 +43,9 @@
     "type": "git",
     "url": ""
   },
+  "pre-commit": [
+    "test"
+  ],
   "author": "leo",
   "license": "MIT"
 }

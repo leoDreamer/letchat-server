@@ -1,20 +1,20 @@
 "use strict";
 
+const userRule = {
+    name: {
+        type: "string",
+        required: true,
+        max: 24,
+        min: 3
+    },
+    passwd: {
+        type: "string",
+        required: true,
+        max: 24,
+        min: 6
+    }
+};
 module.exports = app => {
-    const userRule = {
-        name: {
-            type: "string",
-            required: true,
-            max: 24,
-            min: 3
-        },
-        passwd: {
-            type: "string",
-            required: true,
-            max: 24,
-            min: 6
-        }
-    };
     class Auth extends app.Controller {
         async register(ctx) {
             ctx.validate(userRule);
@@ -24,7 +24,7 @@ module.exports = app => {
             ctx.status = 204;
         }
         async login(ctx) {
-            ctx.validate(ctx.request.body);
+            ctx.validate(userRule);
             const login = await ctx.service.auth.login(ctx.request.body);
             ctx.assert(login, "用户名或密码错误");
 
