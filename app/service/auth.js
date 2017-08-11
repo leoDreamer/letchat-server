@@ -1,15 +1,18 @@
 module.exports = app => {
     class Auth extends app.Service {
-        async rigisterUser (user) {
-            const query = `insert into user(name, passwd) values(${user.name},${user.passwd})`;
-            const dbUser = await this.ctx.db.query(query);
+        async register (user) {
+            const dbUser = await this.ctx.model.User.create(user);
             return dbUser;
         }
 
         async login (user) {
-            const query = `select * from user where name=${user.name} and passwd=${user.passwd}`;
-            const dbUser = await this.ctx.db.query(query);
-            return dbUser.length > 0 ? true : false;
+            const dbUser = await this.ctx.model.User.findOne({
+                where: {
+                    name: user.name,
+                    passwd: user.passwd
+                }
+            });
+            return dbUser;
         }
     }
     return Auth;

@@ -29,4 +29,12 @@ describe("Auth Controller", () => {
           .expect(204);
     });
 
+    it("登录成功", () => {
+      app.mockCsrf();
+      return app.httpRequest()
+          .post("/auth/login")
+          .send(user)
+          .expect(204);
+    });
+
 });
