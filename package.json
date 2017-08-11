@@ -18,7 +18,9 @@
     "egg-mysql": "^3.0.0",
     "egg-validate": "^1.0.0",
     "egg-sequelize": "^3.1.0",
-    "mysql2": "^1.4.0"
+    "mysql2": "^1.4.0",
+    "egg-redis": "^1.0.2",
+    "egg-session-redis": "^1.0.0"
   },
   "engines": {
     "node": ">=6.0.0"
