@@ -1,5 +1,3 @@
-"use strict";
-
 const userRule = {
     name: {
         type: "string",
@@ -25,8 +23,17 @@ module.exports = app => {
         }
         async login(ctx) {
             ctx.validate(userRule);
-            const login = await ctx.service.auth.login(ctx.request.body);
-            ctx.assert(login, "用户名或密码错误");
+            const user = await ctx.service.auth.login(ctx.request.body);
+            ctx.assert(user, "用户名或密码错误");
+            const token = await app.genToken(user.id, ctx.request.ip);
+            ctx.session.user = user.id;
+            ctx.session.token = token.id;
+            ctx.body = ctx.session
+            // ctx.status = 204;
+        }
+
+        async logout(ctx) {
+            ctx.session = null;
 
             ctx.status = 204;
         }

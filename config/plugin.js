@@ -27,3 +27,9 @@ exports.redis = {
   enable: true,
   package: "egg-redis"
 };
+
+// config/plugin.js
+exports.proxyworker = {
+  enable: true,
+  package: "egg-development-proxyworker"
+};
