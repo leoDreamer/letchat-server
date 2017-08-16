@@ -17,3 +17,19 @@ exports.sequelize = {
     enable: true,
     package: "egg-sequelize"
 };
+
+exports.sessionRedis = {
+  enable: true,
+  package: "egg-session-redis"
+};
+
+exports.redis = {
+  enable: true,
+  package: "egg-redis"
+};
+
+// config/plugin.js
+exports.proxyworker = {
+  enable: true,
+  package: "egg-development-proxyworker"
+};

@@ -4,7 +4,7 @@
   "description": "example",
   "private": true,
   "dependencies": {
-    "egg": "^1.4.0"
+    "egg": "^1.7.0"
   },
   "devDependencies": {
     "autod": "^2.8.0",
@@ -18,7 +18,11 @@
     "egg-mysql": "^3.0.0",
     "egg-validate": "^1.0.0",
     "egg-sequelize": "^3.1.0",
-    "mysql2": "^1.4.0"
+    "mysql2": "^1.4.0",
+    "egg-redis": "^1.0.2",
+    "egg-session-redis": "^1.0.0",
+    "moment": "^2.18.1",
+    "egg-development-proxyworker": "^1.1.1"
   },
   "engines": {
     "node": ">=6.0.0"
@@ -26,15 +30,13 @@
   "scripts": {
     "start": "node index.js",
     "dev": "egg-bin dev",
+    "debug": "egg-bin debug",
     "test": "npm run lint -- --fix && npm run test-local",
     "test-local": "egg-bin test",
     "cov": "egg-bin cov",
     "lint": "eslint .",
     "ci": "npm run lint && npm run cov",
-    "autod": "autod",
-    "migrate:new": "egg-sequelize migration:create",
-    "migrate:up": "egg-sequelize db:migrate",
-    "migrate:down": "egg-sequelize db:migrate:undo"
+    "autod": "autod"
   },
   "ci": {
     "version": "6, 8"
