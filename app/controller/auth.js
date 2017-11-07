@@ -28,8 +28,9 @@ module.exports = app => {
             const token = await app.genToken(user.id, ctx.request.ip);
             ctx.session.user = user.id;
             ctx.session.token = token.id;
-            ctx.body = ctx.session
-            // ctx.status = 204;
+            ctx.body = ctx.session;
+
+            ctx.status = 204;
         }
 
         async logout(ctx) {
