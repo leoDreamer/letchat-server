@@ -3,11 +3,6 @@
 // had enabled by egg
 // exports.static = true;
 
-exports.mysql = {
-    enable: true,
-    package: "egg-mysql"
-};
-
 exports.validate = {
     enable: true,
     package: "egg-validate"
@@ -26,10 +21,4 @@ exports.sessionRedis = {
 exports.redis = {
   enable: true,
   package: "egg-redis"
-};
-
-// config/plugin.js
-exports.proxyworker = {
-  enable: true,
-  package: "egg-development-proxyworker"
 };

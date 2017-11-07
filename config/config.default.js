@@ -1,43 +1,33 @@
 "use strict";
 
 const database = "egg";
-const redisHost = "192.168.189.130";
-const dbHost = "localhost";
+const host = "192.168.189.130";
 module.exports = appInfo => {
   const config = {};
 
   // should change to your own
   config.keys = appInfo.name + "_1501817502166_7037";
+  config.noPrefix = true;
 
   // add your config here
   config.logger = {
     consoleLevel: "INFO"
   };
 
-  config.mysql = {
-    client: {
-      host: dbHost,
-      port: "3306",
-      user: "root",
-      passsword: "",
-      database: database
-    }
-  };
-
   config.sequelize = {
     dialect: "mysql", // db type
     database: database,
-    host: dbHost,
+    host: host,
     port: "3306",
     username: "root",
-    password: "",
+    password: "root",
     log: false
   };
 
   config.redis = {
     client: {
       port: 6379,          // Redis port
-      host: redisHost,   // Redis host
+      host: host,   // Redis host
       password: "",
       db: 0
     }
@@ -48,10 +38,6 @@ module.exports = appInfo => {
     maxAge: 24 * 3600 * 1000, // 1 天
     httpOnly: true,
     encrypt: false
-  };
-
-  config.proxyworker = {
-    port: 10086
   };
 
   return config;

@@ -4,7 +4,15 @@
   "description": "example",
   "private": true,
   "dependencies": {
-    "egg": "^1.7.0"
+    "egg": "^1.7.0",
+    "egg-mysql": "^3.0.0",
+    "egg-redis": "^1.0.2",
+    "egg-scripts": "^1.2.0",
+    "egg-sequelize": "^3.1.0",
+    "egg-session-redis": "^1.0.0",
+    "egg-validate": "^1.0.0",
+    "mocha": "^3.5.3",
+    "mysql2": "^1.4.2"
   },
   "devDependencies": {
     "autod": "^2.8.0",
@@ -15,28 +23,24 @@
     "eslint": "^3.19.0",
     "eslint-config-egg": "^4.2.0",
     "webstorm-disable-index": "^1.2.0",
-    "egg-mysql": "^3.0.0",
-    "egg-validate": "^1.0.0",
-    "egg-sequelize": "^3.1.0",
-    "mysql2": "^1.4.0",
-    "egg-redis": "^1.0.2",
-    "egg-session-redis": "^1.0.0",
-    "moment": "^2.18.1",
-    "egg-development-proxyworker": "^1.1.1"
+    "moment": "^2.18.1"
   },
   "engines": {
-    "node": ">=6.0.0"
+    "node": ">=8.0.0"
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "egg-scripts start",
+    "stop": "egg-scripts stop",
     "dev": "egg-bin dev",
     "debug": "egg-bin debug",
-    "test": "npm run lint -- --fix && npm run test-local",
-    "test-local": "egg-bin test",
-    "cov": "egg-bin cov",
+    "report": "egg-bin cov",
+    "test": "egg-bin test",
+    "cov": "nyc npm test && nyc check-coverage --lines 95 --functions 95 --branches 95 egg-bin test",
     "lint": "eslint .",
     "ci": "npm run lint && npm run cov",
-    "autod": "autod"
+    "autod": "autod",
+    "commitmsg": "validate-commit-msg",
+    "jsdoc": "jsdoc -c ./conf.json"
   },
   "ci": {
     "version": "6, 8"
