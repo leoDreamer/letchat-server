@@ -11,14 +11,14 @@ services:
         restart: always
         ports: 
             - "27017:27017"
+    mysql:
+        image: mysql:latest
+        restart: always
+        ports:
+            - "3306:3306"
         environment:
             - MYSQL_DATABASE=mysitedb
             - MYSQL_ROOT_PASSWORD=123456
         volumes:
             - "/data/mysql/db:/var/lib/mysql"
             - "/data/mysql/conf:/etc/mysql/conf.d"
-    mysql:
-        image: mysql:latest
-        restart: always
-        ports:
-            - "3306:3306"

@@ -4,6 +4,7 @@ const database = "egg";
 const host = "192.168.189.130";
 module.exports = appInfo => {
   const config = {};
+  config.sessionPrefix = "letchat";
 
   // should change to your own
   config.keys = appInfo.name + "_1501817502166_7037";
@@ -31,13 +32,6 @@ module.exports = appInfo => {
       password: "",
       db: 0
     }
-  };
-
-  config.sessionRedis = {
-    key: "EGG_SESSION",
-    maxAge: 24 * 3600 * 1000, // 1 天
-    httpOnly: true,
-    encrypt: false
   };
 
   return config;
