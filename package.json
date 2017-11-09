@@ -9,7 +9,6 @@
     "egg-redis": "^1.0.2",
     "egg-scripts": "^1.2.0",
     "egg-sequelize": "^3.1.0",
-    "egg-session-redis": "^1.0.0",
     "egg-validate": "^1.0.0",
     "mocha": "^3.5.3",
     "mysql2": "^1.4.2",
@@ -35,13 +34,12 @@
     "dev": "egg-bin dev",
     "debug": "egg-bin debug",
     "report": "egg-bin cov",
-    "test": "egg-bin test",
+    "test": "set NODE_ENV=test&&egg-bin test",
     "cov": "nyc npm test && nyc check-coverage --lines 95 --functions 95 --branches 95 egg-bin test",
     "lint": "eslint .",
     "ci": "npm run lint && npm run cov",
     "autod": "autod",
-    "commitmsg": "validate-commit-msg",
-    "jsdoc": "jsdoc -c ./conf.json"
+    "commitmsg": "validate-commit-msg"
   },
   "ci": {
     "version": "6, 8"
