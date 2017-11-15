@@ -4,8 +4,8 @@ const HtmlWebpackPlugin = require("html-webpack-plugin"); // 生成html
 const CleanWebpackPlugin = require("clean-webpack-plugin"); // 清除打包出的目录
 const ExtractTextPlugin = require("extract-text-webpack-plugin"); // 提取css
 
+const sourceDir = path.resolve(__dirname, "../");
 const root = process.cwd();
-const sourceDir = "/app/resource";
 
 // const vue = {
 //   loader: {
@@ -15,14 +15,13 @@ const sourceDir = "/app/resource";
 //     })
 //   }
 // };
-
 const config = {
   entry: {
     main: `${sourceDir}/index.js`,
-    venders: ["vue", "vue-router", "vuex"]
+    vender: ["vue", "vue-router", "vuex"]
   },
   output: {
-    path: path.resolve(root, "view/static"),
+    path: path.resolve(sourceDir, "../view/static"),
     publicPath: "/",
     filename: "js/[name].[chunkhash].js",
     chunkFilename: "[id].[chunkhash].js"
@@ -30,7 +29,7 @@ const config = {
   resolve: {
     extensions: [".js", ".vue"],
     alias: {
-      "vue$": "vue/dist/vue.js",
+      "vue$": `${path.resolve(root, "node_modules/vue/dist/vue.js")}`,
       "src": sourceDir
     }
   },
@@ -74,7 +73,7 @@ const config = {
     new HtmlWebpackPlugin({
       template: `${sourceDir}/index.html`,
       title: "Leo",
-      filename: "index.html",
+      filename: `${path.resolve(sourceDir, "../view")}/index.html`,
       inject: true
     }),
     new webpack.LoaderOptionsPlugin({

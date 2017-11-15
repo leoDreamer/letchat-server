@@ -1,5 +1,6 @@
 "use strict";
 
+const path = require("path");
 const database = "egg";
 const host = "192.168.189.130";
 module.exports = appInfo => {
@@ -40,6 +41,11 @@ module.exports = appInfo => {
     mapping: {
       ".html": "nunjucks"
     }
+  };
+
+  config.static = {
+    prefix: "/",
+    dir: path.join(appInfo.baseDir, "app/view/static")
   };
 
   return config;
