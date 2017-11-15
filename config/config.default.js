@@ -34,5 +34,13 @@ module.exports = appInfo => {
     }
   };
 
+  config.view = {
+    defaultViewEngine: "nunjucks", // 默认渲染引擎
+    defaultExtension: ".html", // 省略后缀名
+    mapping: {
+      ".html": "nunjucks"
+    }
+  };
+
   return config;
 };
