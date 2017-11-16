@@ -4,21 +4,12 @@ const HtmlWebpackPlugin = require("html-webpack-plugin"); // 生成html
 const CleanWebpackPlugin = require("clean-webpack-plugin"); // 清除打包出的目录
 const ExtractTextPlugin = require("extract-text-webpack-plugin"); // 提取css
 
-const sourceDir = path.resolve(__dirname, "../");
-const root = process.cwd();
+const sourceDir = path.resolve(__dirname, "../resource");
 
-// const vue = {
-//   loader: {
-//     css: ExtractTextPlugin.extract({
-//         fallback: "vue-style-loader", //resolve-url-loader may be chained before sass-loader if necessary
-//         use: ["css-loader", "sass-loader"]
-//     })
-//   }
-// };
 const config = {
   entry: {
     main: `${sourceDir}/index.js`,
-    vender: ["vue", "vue-router", "vuex"]
+    vendor: ["vue", "vue-router", "vuex"]
   },
   output: {
     path: path.resolve(sourceDir, "../view/static"),
@@ -29,8 +20,9 @@ const config = {
   resolve: {
     extensions: [".js", ".vue"],
     alias: {
-      "vue$": `${path.resolve(root, "node_modules/vue/dist/vue.js")}`,
-      "src": sourceDir
+      "vue$": "vue/dist/vue.common.js",
+      "src": sourceDir,
+      "assets": path.resolve(sourceDir, "assets")
     }
   },
   module: {
@@ -64,8 +56,8 @@ const config = {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin("view", {
-      root: "view"
+    new CleanWebpackPlugin(path.resolve(sourceDir, "../view"), {
+      root: path.resolve(sourceDir, "../../")
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: "vendor"

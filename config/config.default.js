@@ -40,12 +40,13 @@ module.exports = appInfo => {
     defaultExtension: ".html", // 省略后缀名
     mapping: {
       ".html": "nunjucks"
-    }
+    },
+    root: path.join(appInfo.baseDir, "view")
   };
 
   config.static = {
     prefix: "/",
-    dir: path.join(appInfo.baseDir, "app/view/static")
+    dir: path.join(appInfo.baseDir, "view/static")
   };
 
   return config;

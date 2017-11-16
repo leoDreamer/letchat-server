@@ -1,10 +1,9 @@
 <template>
-    <div>
-        <span class="test-msg">{{msg}} </span>
-    </div>
+    <span>{{msg}} </span>
 </template>
 <script>
     export default {
+        name: "App",
         data () {
             return {
                 msg: "Hello Leo"
@@ -12,8 +11,9 @@
         }
     }
 </script>
-<style lang="scss">
-    .test-msg{
-        color: red
+<style rel="stylesheet/scss" lang="scss">
+    $test-color: red;
+    span {
+        color: $test-color
     }
 </style>
