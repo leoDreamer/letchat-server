@@ -1,11 +1,14 @@
 <template>
     <div>
         <p>This is App Component Msg: {{msg}}</p>
+        <h5>Iview Test :</h5>
+        <Slider v-model="value" range></Slider>
+        <h5>Vuex Test :</h5>
+        <p>Store Value: {{$store.state.count}}</p>
+        <button v-on:click="add">Add</button>
         <h5>Router-link :</h5>
         <p><router-link to="/pagea">Go A</router-link></p>
         <p><router-link to="/pageb">Go B</router-link></p>
-        <h5>Iview Test :</h5>
-        <Slider v-model="value" range></Slider>
         <h5>Router-view :</h5>
         <router-view></router-view>
     </div>
@@ -17,6 +20,11 @@
             return {
                 msg: "Hello Leo",
                 value: [20, 50]
+            }
+        },
+        methods: {
+            add: function () {
+                this.$store.commit('increment')
             }
         }
     }

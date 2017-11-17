@@ -1,29 +1,27 @@
 import Vue from "vue";
-import App from "./app.vue";
+import App from "./app";
 import Router from "vue-router";
 import iview from "iview";
+import Vuex from "vuex";
+import { routes } from "./router";
+import { stores } from "./store";
 import "../node_modules/iview/dist/styles/iview.css";
 
-import PageA from "./pages/pagea";
-import PageB from "./pages/pageb";
-
-const routes = [
-    { path: "/pagea", component: PageA },
-    { path: "/pageb", component: PageB }
-];
+Vue.use(iview);
+Vue.use(Router);
+Vue.use(Vuex);
 
 const router = new Router({
     routes
 });
 
-Vue.use(iview);
-Vue.use(Router);
-
+const store = new Vuex.Store(stores);
 Vue.config.debug = true;
 
 new Vue({
     el: "#app",
     template: "<App/>",
     components: { App },
-    router
+    router,
+    store
 });
