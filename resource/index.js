@@ -1,9 +1,8 @@
-/**
- * Created by leo on 2017/4/10.
- */
 import Vue from "vue";
 import App from "./app.vue";
 import Router from "vue-router";
+import iview from "iview";
+import "../node_modules/iview/dist/styles/iview.css";
 
 import PageA from "./pages/pagea";
 import PageB from "./pages/pageb";
@@ -16,6 +15,8 @@ const routes = [
 const router = new Router({
     routes
 });
+
+Vue.use(iview);
 Vue.use(Router);
 
 Vue.config.debug = true;

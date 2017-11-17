@@ -29,21 +29,26 @@ const config = {
     rules: [
       {
         test: /\.vue$/,
-        loader: "vue-loader",
-        include: [sourceDir]
+        loader: "vue-loader"
       },
       {
         test: /\.js$/,
         loader: "babel-loader",
-        include: [sourceDir]
+        include: ["node_modules"]
+      },
+      {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: "css-loader"
+        })
       },
       {
         test: /\.scss/,
         loader: ExtractTextPlugin.extract({
           fallback: "style-loader",
           use: "css-loader!sass-loader"
-        }),
-        include: [sourceDir]
+        })
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -82,7 +87,7 @@ const config = {
           }
         }
     }),
-    new ExtractTextPlugin({ filename: "app.css", allChunks: true })
+    new ExtractTextPlugin({ filename: "css/[name].[contenthash].css", allChunks: true })
   ]
 };
 
