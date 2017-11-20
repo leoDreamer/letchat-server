@@ -70,7 +70,10 @@ const config = {
     new HtmlWebpackPlugin({
       template: `${sourceDir}/index.html`,
       title: "Leo",
-      filename: `${path.resolve(sourceDir, "../view")}/index.html`,
+      output: {
+        path: `${path.resolve(sourceDir, "../view")}`,
+        filename: "index.html"
+      },
       inject: true
     }),
     new webpack.LoaderOptionsPlugin({

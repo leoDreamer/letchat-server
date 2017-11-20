@@ -49,5 +49,17 @@ module.exports = appInfo => {
     dir: path.join(appInfo.baseDir, "view/static")
   };
 
+  config.webpack = {
+    port: 8082,
+    proxy: false,
+    proxyMapping: {
+      js: "text/javascript; charset=UTF-8",
+      css: "text/css; charset=UTF-8",
+      json: "application/json; charset=UTF-8",
+      html: "text/html; charset=UTF-8"
+    },
+    webpackConfigList: [require("../build/webpack.dev.js")]
+  };
+
   return config;
 };
