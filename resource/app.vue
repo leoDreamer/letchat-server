@@ -1,33 +1,20 @@
 <template>
-    <div>
-        <p>This is App Component Msg: {{msg}}</p>
-        <h5>Iview Test :</h5>
-        <Slider v-model="value" range></Slider>
-        <h5>Vuex Test :</h5>
-        <p>Store Value: {{$store.state.count}}</p>
-        <button v-on:click="add">Add</button>
-        <h5>Router-link :</h5>
-        <p><router-link to="/pagea">Go A</router-link></p>
-        <p><router-link to="/pageb">Go B</router-link></p>
-        <h5>Router-view :</h5>
-        <router-view></router-view>
-    </div>
+    <!-- 页面body -->
+    <router-view class="router_view"></router-view>
 </template>
 <script>
     export default {
-        name: "App",
-        data () {
-            return {
-                msg: "Hello Leo",
-                value: [20, 50]
-            }
-        },
-        methods: {
-            add: function () {
-                this.$store.commit('increment')
-            }
-        }
+        name: "App"
     }
 </script>
 <style rel="stylesheet/scss" lang="scss">
+    * {
+        border: 0px;
+        padding: 0px;
+        margin: 0px;
+    };
+    .router_view {
+        min-height: 100vh;
+        width: 100%;
+    }
 </style>
