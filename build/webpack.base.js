@@ -33,8 +33,7 @@ const config = {
       },
       {
         test: /\.js$/,
-        loader: "babel-loader",
-        include: ["node_modules"]
+        loader: "babel-loader"
       },
       {
         test: /\.css$/,
