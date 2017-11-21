@@ -24,6 +24,6 @@ exports.nunjucks = {
 };
 
 exports.webpack = {
-    enable: true,
+    enable: false,
     package: "egg-webpack"
 };

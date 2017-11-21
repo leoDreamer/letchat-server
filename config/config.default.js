@@ -41,7 +41,7 @@ module.exports = appInfo => {
     mapping: {
       ".html": "nunjucks"
     },
-    root: path.join(appInfo.baseDir, "view")
+    root: path.join(appInfo.baseDir, "view/static")
   };
 
   config.static = {
