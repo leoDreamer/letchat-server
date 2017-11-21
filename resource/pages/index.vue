@@ -3,7 +3,7 @@
         <!-- 导航栏 -->
         <page-nav></page-nav>
         <!-- 主要内容 -->
-        <Row type="flex" align="middle" class="index_content main_content" justify="center">
+        <Row class="index_content main_content">
             <Col span=24>
                 <p class="title">Hi, &nbsp&nbsp I &nbsp&nbsp am &nbsp&nbsp Leo</p>
                 <p class="sub_title">- Web Developer -</p>
@@ -28,11 +28,6 @@
         },
         components: {
             "page-nav": Nav
-        },
-        methods: {
-            add: function () {
-                this.$store.commit('increment')
-            }
         }
     }
 </script>
@@ -51,9 +46,7 @@
 .index_content {
     font-size: 25px;
     text-align: center;
-    height: 100%;
-    margin-top: -60px;
-    padding-top: 60px;
+    margin: auto 0;
     p {
         color: #ffffff;
         text-align: center;

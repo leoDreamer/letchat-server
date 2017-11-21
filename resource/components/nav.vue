@@ -16,7 +16,7 @@
             实验室
           </router-link>
       </MenuItem>
-      <MenuItem name="2">
+      <MenuItem name="3">
           <router-link to="/introduce" class="link_font">
             <Icon type="ios-people"></Icon>
             博客
@@ -31,11 +31,6 @@
             return {
                 theme1: 'dark',
                 value: [20, 50]
-            }
-        },
-        methods: {
-            add: function () {
-                this.$store.commit('increment')
             }
         }
     }

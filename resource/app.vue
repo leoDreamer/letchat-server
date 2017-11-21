@@ -14,7 +14,9 @@
         margin: 0px;
     };
     .router_view {
-        min-height: 100vh;
         width: 100%;
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
     }
 </style>
