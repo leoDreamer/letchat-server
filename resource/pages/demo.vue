@@ -12,8 +12,4 @@
     }
 </script>
 <style rel="stylesheet/scss" lang="scss">
-    $test-color: blue;
-    span {
-        color: $test-color
-    }
 </style>
