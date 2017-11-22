@@ -1,13 +1,10 @@
 import Vue from "vue";
 import App from "./app";
-import Router from "vue-router";
 import Vuex from "vuex";
-import { routes } from "./router";
 import { stores } from "./store";
-import "../node_modules/iview/dist/styles/iview.css";
+import "root/node_modules/iview/dist/styles/iview.css";
 
-// use router and vuex
-Vue.use(Router);
+// vuex
 Vue.use(Vuex);
 
 // 按需引入iview组件
@@ -24,10 +21,7 @@ Vue.component("Button", Button);
 Vue.component("TimelineItem", Timeline.Item);
 Vue.component("Progress", Progress);
 
-// init router and vuex
-const router = new Router({
-    routes
-});
+// init vuex
 const store = new Vuex.Store(stores);
 Vue.config.debug = true;
 
@@ -36,6 +30,5 @@ new Vue({
     el: "#app",
     template: "<App/>",
     components: { App },
-    router,
     store
 });

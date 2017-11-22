@@ -1,7 +1,7 @@
-import Blog from "./pages/blog";
-import Project from "./pages/project";
-import Index from "./pages/index";
-import Introduce from "./pages/introduce";
+import Blog from "../blog";
+import Project from "../project";
+import Index from "../index.vue";
+import Introduce from "../introduce";
 
 const routes = [
     { path: "/", component: Index },

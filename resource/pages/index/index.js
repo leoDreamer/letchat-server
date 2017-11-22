@@ -2,9 +2,9 @@ import Vue from "vue";
 import App from "./app";
 import Router from "vue-router";
 import Vuex from "vuex";
-import { routes } from "./router";
-import { stores } from "./store";
-import "../node_modules/iview/dist/styles/iview.css";
+import { routes } from "./js/router";
+import { stores } from "./js/store";
+import "root/node_modules/iview/dist/styles/iview.css";
 
 // use router and vuex
 Vue.use(Router);

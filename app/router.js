@@ -8,4 +8,5 @@ module.exports = app => {
 
   // page
   app.get("/index", app.controller.page.index);
+  app.get("/chat", app.controller.page.index);
 };

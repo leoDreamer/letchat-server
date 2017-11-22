@@ -35,6 +35,7 @@
     "eslint-config-egg": "^4.2.0",
     "extract-text-webpack-plugin": "",
     "file-loader": "^1.1.5",
+    "glob": "^7.1.2",
     "html-webpack-plugin": "",
     "iview": "^2.7.3",
     "moment": "^2.18.1",

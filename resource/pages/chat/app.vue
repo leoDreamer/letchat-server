@@ -1,6 +1,6 @@
 <template>
     <!-- 页面body -->
-    <router-view class="router_view"></router-view>
+    <h1>Hi, Leo. this is chat page</h1>
 </template>
 <script>
     export default {

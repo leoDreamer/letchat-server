@@ -8,7 +8,7 @@
     }
 </script>
 <style rel="stylesheet/scss" lang="scss">
-    @import "./assets/common.scss";
+    @import "../../assets/common";
     * {
         border: 0px;
         padding: 0px;

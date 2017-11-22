@@ -11,7 +11,7 @@
     </div>
 </template>
 <script>
-    import Nav from "../components/nav";
+    import Nav from "components/nav";
     export default {
         name: "Blog",
         data () {
@@ -25,7 +25,7 @@
     }
 </script>
 <style rel="stylesheet/scss" lang="scss">
-    @import "../assets/common.scss";
+    @import "../../assets/common";
     .blog_main_content {
         background-color: $gray;
     }

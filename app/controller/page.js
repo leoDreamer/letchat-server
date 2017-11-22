@@ -3,7 +3,8 @@ module.exports = app => {
     async index(ctx) {
       const { path } = ctx;
       const pagesMap = {
-        "/index": "index"
+        "/index": "index",
+        "/chat": "chat"
       };
 
       await ctx.render(pagesMap[path]);

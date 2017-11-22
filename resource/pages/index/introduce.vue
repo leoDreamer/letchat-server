@@ -61,7 +61,7 @@
   </div>
 </template>
 <script>
-    import Nav from "../components/nav";
+    import Nav from "components/nav";
     export default {
         name: "Introduce",
         data () {
@@ -160,7 +160,7 @@
     }
 </script>
 <style rel="stylesheet/scss" lang="scss">
-    @import "../assets/common.scss";
+    @import "../../assets/common";
     .introduce_content {
       background-color: $gray;
       .sub_content {
