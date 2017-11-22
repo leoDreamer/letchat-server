@@ -37,12 +37,6 @@
   background-repeat: no-repeat;
   background-size: 100% 100%;
 }
-.ivu-menu-item {
-    float: right !important;
-}
-.main_content {
-    width: 100%;
-}
 .index_content {
     font-size: 25px;
     text-align: center;

@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 导航栏 -->
-    <page-nav></page-nav>
+    <page-nav  active-name="1"></page-nav>
     <!-- 主要内容 -->
     <Row type="flex" align="middle" class="introduce_content main_content" justify="center">
       <Col class="sub_content" :span="20">
@@ -160,8 +160,9 @@
     }
 </script>
 <style rel="stylesheet/scss" lang="scss">
+    @import "../assets/common.scss";
     .introduce_content {
-      background-color: #777777;
+      background-color: $gray;
       .sub_content {
         margin: 40px 20px 0px 20px;
         background-color: #ffffff;
