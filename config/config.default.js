@@ -46,6 +46,8 @@ module.exports = appInfo => {
 
   config.static = {
     prefix: "/",
+    gzip: true,
+    maxAge: 60 * 60 * 24 * 30,
     dir: path.join(appInfo.baseDir, "view/static")
   };
 
