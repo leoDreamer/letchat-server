@@ -4,7 +4,7 @@
 		"setTimeout": true,
 		"clearTimeout": true,
 		"module": true,
-    "require": true,
+    	"require": true,
 		"describe": true,
 		"beforeEach": true,
 		"afterEach": true,
@@ -20,7 +20,9 @@
 		"global": true,
 		"spyOn": true,
 		"xit": true,
-		"Buffer": true
+		"Buffer": true,
+		"exports": true,
+		"process": true
 	},	
 	"parser": "babel-eslint",
 	"parserOptions": {

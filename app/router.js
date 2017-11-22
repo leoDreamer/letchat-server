@@ -1,6 +1,11 @@
-"use strict";
-
 module.exports = app => {
-  app.get("/", "home.index");
-  app.post("auth/login", "auth.login");
+  const prefix = app.config.noPrefix ? "" : "/api/v1";
+
+  // api
+  app.post(`${prefix}/auth/register`, app.controller.auth.register);
+  app.post(`${prefix}/auth/login`, app.controller.auth.login);
+  app.get(`${prefix}/auth/logout`, app.controller.auth.logout);
+
+  // page
+  app.get("/index", app.controller.page.index);
 };

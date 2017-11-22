@@ -1,0 +1,24 @@
+version: "2.0"
+
+services: 
+    redis: 
+        image: redis:3.2
+        restart: always
+        ports:
+            - "6379:6379"
+    mongo: 
+        image: mongo:3.4.1
+        restart: always
+        ports: 
+            - "27017:27017"
+    mysql:
+        image: mysql:latest
+        restart: always
+        ports:
+            - "3306:3306"
+        environment:
+            - MYSQL_DATABASE=mysitedb
+            - MYSQL_ROOT_PASSWORD=123456
+        volumes:
+            - "/data/mysql/db:/var/lib/mysql"
+            - "/data/mysql/conf:/etc/mysql/conf.d"

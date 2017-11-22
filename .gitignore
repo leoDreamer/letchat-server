@@ -6,4 +6,12 @@ coverage/
 run/
 .DS_Store
 *.swp
-
+yarn.lock
+.travis.yml
+.vscode
+package-lock.json
+config/config.*.js
+jsdoc
+.nyc_output
+files/
+view

@@ -1,33 +1,49 @@
-# example
+# egg-example
 
-example
+### 一个初次使用Egg框架的服务端Demo,完成一个聊天室的功能,数据库使用mysql.
 
-## QuickStart
-
-<!-- add docs here for user -->
-
-see [egg docs][egg] for more detail.
-
-### Development
-```shell
-$ npm install
-$ npm run dev
-$ open http://localhost:7001/news
+### vscode debug config
+```javascript
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Test",
+      "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
+      "args": [
+        "--recursive",
+        "-u",
+        "tdd",
+        "--timeout",
+        "999999",
+        "--colors",
+        "${workspaceRoot}/test"
+      ],
+      "internalConsoleOptions": "openOnSessionStart",
+      "env": {
+        "EGG_SERVER_ENV": "unittest"
+      }
+    },
+    {
+      "name": "Launch",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceRoot}",
+      "runtimeExecutable": "npm",
+      "windows": { "runtimeExecutable": "npm.cmd" },
+      "runtimeArgs": [ "run", "debug" ],
+      "console": "integratedTerminal",
+      "protocol": "auto",
+      "restart": true,
+      "port": 9999,
+      "env": {
+        "EGG_SERVER_ENV": "local"
+      }
+    }
+  ]
+}
 ```
 
-### Deploy
-
-Use `EGG_SERVER_ENV=prod` to enable prod mode
-
-```shell
-$ EGG_SERVER_ENV=prod npm start
-```
-
-### npm scripts
-
-- Use `npm run lint` to check code style.
-- Use `npm test` to run unit test.
-- Use `npm run autod` to auto detect dependencies upgrade, see [autod](https://www.npmjs.com/package/autod) for more detail.
-
-
-[egg]: https://eggjs.org
+### coding....
