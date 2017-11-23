@@ -6,6 +6,9 @@ module.exports = app => {
   app.post(`${prefix}/auth/login`, app.controller.auth.login);
   app.get(`${prefix}/auth/logout`, app.controller.auth.logout);
 
+  // publick assets
+  app.get("/data/index", app.controller.public.indexData);
+
   // page
   app.get("/index", app.controller.page.index);
   app.get("/chat", app.controller.page.index);

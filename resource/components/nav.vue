@@ -37,6 +37,7 @@
 <style rel="stylesheet/scss" lang="scss">
     .index_nav {
         width: 100%;
+        user-select: none;
         span {
             padding: 0px 20px;
             font-size: 30px;

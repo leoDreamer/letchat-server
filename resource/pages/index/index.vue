@@ -33,14 +33,15 @@
 </script>
 <style rel="stylesheet/scss" lang="scss">
     .index_main_content {
-    background: url("../../assets/main_bg.jpg");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
+        background: url("../../assets/main_bg.jpg");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
     }
     .index_content {
         font-size: 25px;
         text-align: center;
         margin: auto 0;
+        user-select: none;
         p {
             color: #ffffff;
             text-align: center;

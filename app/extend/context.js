@@ -2,6 +2,16 @@ const moment = require("moment");
 
 module.exports = {
 
+    // 包装response
+    set jsonBody(data) {
+        this.assert(data && typeof data === "object");
+        this.body = {
+            code: 200,
+            msg: "success",
+            data
+        };
+    },
+
     // 生成token
     genToken (userId, ip) {
         const expire = new Date(moment().add(1, "days"));

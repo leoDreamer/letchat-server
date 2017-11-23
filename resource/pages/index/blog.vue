@@ -26,9 +26,6 @@
 </script>
 <style rel="stylesheet/scss" lang="scss">
     @import "../../assets/common";
-    .blog_main_content {
-        background-color: $gray;
-    }
     .blog_content {
         font-size: 25px;
         text-align: center;

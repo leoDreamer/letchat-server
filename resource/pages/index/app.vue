@@ -4,7 +4,10 @@
 </template>
 <script>
     export default {
-        name: "App"
+        name: "App",
+        beforeCreate () {
+            this.$store.dispatch("initData")
+        }
     }
 </script>
 <style rel="stylesheet/scss" lang="scss">
@@ -19,5 +22,6 @@
         min-height: 100%;
         display: flex;
         flex-direction: column;
+        background-color: $gray;
     }
 </style>

@@ -53,7 +53,8 @@ module.exports = appInfo => {
 
   config.webpack = {
     port: 8082,
-    proxy: false,
+    appPort: 7001,
+    proxy: true,
     proxyMapping: {
       js: "text/javascript; charset=UTF-8",
       css: "text/css; charset=UTF-8",
