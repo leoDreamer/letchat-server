@@ -28,7 +28,7 @@ module.exports = appInfo => {
 
   config.redis = {
     client: {
-      port: 6379,          // Redis port
+      port: 6379,   // Redis port
       host: host,   // Redis host
       password: "",
       db: 0
@@ -41,19 +41,20 @@ module.exports = appInfo => {
     mapping: {
       ".html": "nunjucks"
     },
-    root: path.join(appInfo.baseDir, "view/static")
+    root: path.join(appInfo.baseDir, "dist/view")
   };
 
   config.static = {
     prefix: "/",
     gzip: true,
     maxAge: 60 * 60 * 24 * 30,
-    dir: path.join(appInfo.baseDir, "view/static")
+    dir: path.join(appInfo.baseDir, "dist/static")
   };
 
   config.webpack = {
     port: 8082,
-    proxy: false,
+    appPort: 7001,
+    proxy: true,
     proxyMapping: {
       js: "text/javascript; charset=UTF-8",
       css: "text/css; charset=UTF-8",

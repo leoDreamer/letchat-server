@@ -19,6 +19,7 @@
   "devDependencies": {
     "autod": "^2.8.0",
     "autod-egg": "^1.0.0",
+    "axios": "^0.17.1",
     "babel-core": "^6.0.0",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^6.0.0",
@@ -35,6 +36,7 @@
     "eslint-config-egg": "^4.2.0",
     "extract-text-webpack-plugin": "",
     "file-loader": "^1.1.5",
+    "glob": "^7.1.2",
     "html-webpack-plugin": "",
     "iview": "^2.7.3",
     "moment": "^2.18.1",
@@ -42,6 +44,7 @@
     "sass-loader": "^6.0.3",
     "style-loader": "^0.16.1",
     "vue": "^2.5.3",
+    "vue-axios": "^2.0.2",
     "vue-loader": "^13.5.0",
     "vue-router": "^3.0.1",
     "vue-template-compiler": "^2.5.3",

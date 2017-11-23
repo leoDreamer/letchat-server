@@ -124,7 +124,7 @@
 		"lines-around-comment": [
 			"error",
 			{
-				"beforeLineComment": true
+				"beforeLineComment": false
 			}
 		],
 		"no-with": "error",

@@ -18,7 +18,7 @@
     </div>
 </template>
 <script>
-    import Nav from "../components/nav";
+    import Nav from "components/nav";
     export default {
         name: "Index",
         data () {
@@ -32,38 +32,33 @@
     }
 </script>
 <style rel="stylesheet/scss" lang="scss">
-.index_main_content {
-  background: url("../assets/main_bg.jpg");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-.ivu-menu-item {
-    float: right !important;
-}
-.main_content {
-    width: 100%;
-}
-.index_content {
-    font-size: 25px;
-    text-align: center;
-    margin: auto 0;
-    p {
-        color: #ffffff;
+    .index_main_content {
+        background: url("../../assets/main_bg.jpg");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+    }
+    .index_content {
+        font-size: 25px;
         text-align: center;
-        padding: 10px 0px;
-    }
-    .title {
-        font-family: "Microsoft YaHei";
-        font-size: 40px;
-    }
-    .more {
-        border: 2px solid #f1b10a;
-        padding: 10px 20px;
-        color: #ffffff;
-        a { 
-            font-size: 15px;
+        margin: auto 0;
+        user-select: none;
+        p {
             color: #ffffff;
+            text-align: center;
+            padding: 10px 0px;
+        }
+        .title {
+            font-family: "Microsoft YaHei";
+            font-size: 40px;
+        }
+        .more {
+            border: 2px solid #f1b10a;
+            padding: 10px 20px;
+            color: #ffffff;
+            a { 
+                font-size: 15px;
+                color: #ffffff;
+            }
         }
     }
-}
 </style>
