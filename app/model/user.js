@@ -1,10 +1,10 @@
 module.exports = app => {
-  const { STRING, INTEGER, DATE, BIGINT } = app.Sequelize;
+  const { STRING, INTEGER, DATE, UUID, UUIDV1 } = app.Sequelize;
   const User = app.model.define("user", {
     login: STRING,
     id: {
-      type: BIGINT(11),
-      autoIncrement:true,
+      type: UUID,
+      defaultValue: UUIDV1,
       primaryKey : true,
       unique : true
     },
