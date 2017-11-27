@@ -2,6 +2,7 @@ const stores = {
   state: {
     user: "",
     projects: [],
+    blogs: [],
     introduce: {
       skills: [],
       experiences: []
@@ -15,6 +16,7 @@ const stores = {
       state.introduce.skills.push(...data.skills);
       state.introduce.experiences.push(...data.experiences);
       state.projects.push(...data.projects);
+      state.blogs.push(...data.blogs);
     }
   },
   actions: {
@@ -27,7 +29,8 @@ const stores = {
           commit("initData", {
               skills: data.skills,
               experiences: data.experiences,
-              projects: data.projects
+              projects: data.projects,
+              blogs: resp.data.data.blogs
           });
       });
     }

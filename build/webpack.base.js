@@ -29,7 +29,7 @@ const htmls = sourceMap("html");
 
 let config = {
   entry: Object.assign({}, entry, {
-    vendors: ["vue", "vue-router", "vuex", "axios", "vue-axios"]
+    vendors: ["vue", "vue-router", "vuex", "axios", "vue-axios", "babel-polyfill"]
   }),
   output: {
     path: path.resolve(root, staticPath),

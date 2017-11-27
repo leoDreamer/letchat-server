@@ -20,6 +20,7 @@
     .router_view {
         width: 100%;
         min-height: 100%;
+        min-width: 1000px;
         display: flex;
         flex-direction: column;
         background-color: $gray;
