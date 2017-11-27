@@ -6,8 +6,9 @@ module.exports = app => {
       const path = "app/public/indexData.json";
       const data = fs.readFileSync(path);
       ctx.assert(data, 404);
+      const blogs = await ctx.model.SfPost.findAll();
 
-      ctx.jsonBody = JSON.parse(data);
+      ctx.jsonBody = Object.assign({}, JSON.parse(data), { blogs });
     }
   }
 

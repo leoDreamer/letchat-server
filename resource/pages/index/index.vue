@@ -25,7 +25,6 @@
         name: "Index",
         data () {
             return {
-                theme1: 'dark',
                 show: false
             }
         },

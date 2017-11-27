@@ -64,5 +64,9 @@ module.exports = appInfo => {
     webpackConfigList: [require("../build/webpack.dev.js")]
   };
 
+  config.custom = {
+    sfHost: "https://segmentfault.com"
+  };
+
   return config;
 };

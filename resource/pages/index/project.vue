@@ -20,7 +20,6 @@
         name: "Project",
         data () {
             return {
-                theme1: 'dark',
                 projects: this.$store.state.projects,
                 colors: [
                     "#fd6a7f",
