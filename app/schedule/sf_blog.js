@@ -3,7 +3,7 @@ const _ = require("lodash");
 
 module.exports = {
   schedule: {
-    interval: 1000 * 3600 * 24 * 2,
+    interval: "2d",
     type: "worker",
     immediate: true
   },
@@ -46,6 +46,8 @@ module.exports = {
         hits
       });
     });
-    ctx.model.SfPost.bulkCreate(posts);
+    ctx.model.SfPost.bulkCreate(posts, {
+      updateOnDuplicate: ["vote", "save", "hits"]
+    });
   }
 };
