@@ -44,7 +44,6 @@
     .project_content {
             text-align: center;
             padding: 40px 0 40px 0;
-            min-height: 90%;
             .col {
                 background-color: #ffffff;
                 border-radius: 10px;

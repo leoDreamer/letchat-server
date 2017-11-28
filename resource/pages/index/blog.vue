@@ -54,7 +54,6 @@
     .blog_content {
         text-align: center;
         padding: 40px 0 40px 0;
-        min-height: 90%;
         .col {
             border-radius: 10px;
             background-color: #ffffff;

@@ -3,7 +3,7 @@ const _ = require("lodash");
 
 module.exports = {
   schedule: {
-    interval: "2d",
+    interval: 1000 * 3600 * 24 * 2,
     type: "worker",
     immediate: true
   },

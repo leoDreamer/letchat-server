@@ -32,7 +32,7 @@
         <div style="background:#eee;padding:20px;margin-bottom:40px">
           <Card :bordered="false" class="info">
             <p slot="title">专业技能</p>
-            <div v-for="s in skill" :key="s.id">
+            <div v-for="s in skill" :key="s.id" class="each_skill">
               {{s.description}}
               <Progress :percent="s.degree" status="active"></Progress>
             </div>
@@ -80,12 +80,12 @@
 <style rel="stylesheet/scss" lang="scss">
     @import "../../assets/common";
     .introduce_content {
+      margin-bottom: 40px;
       .sub_content {
         margin: 40px 20px 0px 20px;
         background-color: #ffffff;
         padding: 40px 40px 40px 40px;
         border-radius: 5px;
-        min-height: 85%;
         .time{
           font-size: 14px;
           font-weight: bold;
@@ -105,6 +105,9 @@
           }
           a {
             color: #333;
+          }
+          .each_skill {
+            line-height: 30px;
           }
         }
       }

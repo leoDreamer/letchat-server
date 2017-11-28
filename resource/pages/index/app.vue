@@ -17,6 +17,11 @@
         padding: 0px;
         margin: 0px;
     };
+    body {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+    }
     .router_view {
         width: 100%;
         min-height: 100%;

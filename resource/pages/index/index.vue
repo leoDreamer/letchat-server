@@ -3,9 +3,9 @@
         <!-- 导航栏 -->
         <page-nav></page-nav>
         <!-- 主要内容 -->
-        <Row class="index_content main_content">
+        <Row class="index_content main_content" type="flex" justify="center" align="middle">
             <transition name="content-show">
-                <Col span=24 v-if="show">
+                <Col span=24 v-if="show" style="height:300px">
                     <p class="title">Hi, &nbsp&nbsp I &nbsp&nbsp am &nbsp&nbsp Leo</p>
                     <p class="sub_title">- Web Developer -</p>
                     <p class="introduce">我是Leo,是一个Web开发者,目前在重庆从事Node/前端方向开发</p>
