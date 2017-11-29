@@ -1,6 +1,8 @@
 const stores = {
   state: {
-    user: "",
+    user: window.global.user || { // eslint-disable-line
+      name: "Leo"
+    },
     projects: [],
     blogs: [],
     introduce: {
@@ -20,9 +22,6 @@ const stores = {
     }
   },
   actions: {
-    setUser () {
-      // TODO 增加用户登录
-    },
     initData ({ commit }) {
       this._vm.axios.get("/data/index").then(resp => {
           const data = resp.data.data.introduce;

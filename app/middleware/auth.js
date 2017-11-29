@@ -4,9 +4,10 @@ const TOKEN = "access_token";
 module.exports = option => function* (next) {
   const token = this.cookies.get(TOKEN) || this.headers[TOKEN];
 
+
+  this.state.auth = Object.assign({ token }, this.state.auth);
   const ret = yield this.app.redis.get(`${option.prefix}:${token}`);
   if (!ret) {
-    this.state.auth = Object.assign({}, this.state.auth);
     yield next;
     return;
   }
@@ -19,9 +20,12 @@ module.exports = option => function* (next) {
     yield this.app.redis.set(`${option.prefix}:${token}`, null);
   }
 
-  const user = yield this.model.User.findById(session.id);
+  const user = yield this.model.User.findById(session.user);
 
+  if (!user) {
+    yield this.app.redis.set(`${option.prefix}:${token}`, null);}
   this.assert(user, 401, "用户不存在");
+
   this.state.auth = Object.assign({}, this.state.auth, {
     token,
     user: user.toJSON()

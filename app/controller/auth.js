@@ -10,6 +10,12 @@ const userRule = {
         required: true,
         max: 24,
         min: 6
+    },
+    nickName: {
+        type: "string",
+        required: true,
+        max: 24,
+        min: 1
     }
 };
 module.exports = app => {
@@ -28,14 +34,14 @@ module.exports = app => {
             ctx.validate(userRule);
 
             // 用户校验
-            const { name, passwd } = ctx.request.body;
-            const user = await this.ctx.model.User.findOne({
+            const { name, passwd, nickName } = ctx.request.body;
+            const [user] = await ctx.model.User.findOrCreate({
                 where: {
                     name: name,
-                    passwd: passwd
+                    passwd: passwd,
+                    nick_name: nickName
                 }
             });
-            ctx.assert(user, "用户名或密码错误");
 
             // 生成token和session并存储
             const token = await ctx.service.token.genToken(user.id, ctx.request.ip);
@@ -45,7 +51,7 @@ module.exports = app => {
             }));
             ctx.cookies.set("access_token", token.id);
 
-            ctx.status = 204;
+            ctx.body = user;
         }
 
         async logout(ctx) { // 登出

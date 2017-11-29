@@ -10,6 +10,7 @@ module.exports = appInfo => {
   // should change to your own
   config.keys = appInfo.name + "_1501817502166_7037";
   config.noPrefix = true;
+  config.middleware = ["auth"];
 
   // add your config here
   config.logger = {
@@ -23,7 +24,13 @@ module.exports = appInfo => {
     port: "3306",
     username: "root",
     password: "root",
-    log: false
+    log: false,
+    define: {
+      freezeTableName: true,
+      underscored: true,
+      paranoid: true,
+      charset: "utf8"
+    }
   };
 
   config.redis = {
@@ -47,7 +54,7 @@ module.exports = appInfo => {
   config.static = {
     prefix: "/",
     gzip: true,
-    maxAge: 60 * 60 * 24 * 30,
+    // maxAge: 60 * 60 * 24 * 30,
     dir: path.join(appInfo.baseDir, "dist/static")
   };
 

@@ -1,7 +1,10 @@
 module.exports = app => {
-  const { STRING, INTEGER, DATE, UUID, UUIDV1 } = app.Sequelize;
+  const { STRING, INTEGER, DATE, UUID, UUIDV1, BOOLEAN } = app.Sequelize;
   const User = app.model.define("user", {
-    login: STRING,
+    login: {
+      type: BOOLEAN,
+      default: false
+    },
     id: {
       type: UUID,
       defaultValue: UUIDV1,
@@ -14,8 +17,7 @@ module.exports = app => {
     },
     name: STRING(30),
     passwd: STRING(32),
-    age: INTEGER,
-    last_sign_in_at: DATE,
+    nick_name: STRING(32),
     created_at: DATE,
     updated_at: DATE
   });

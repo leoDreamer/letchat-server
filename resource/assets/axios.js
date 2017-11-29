@@ -1,7 +1,21 @@
 import axios from "axios";
-import { Notice } from "iview";
+import { Message } from "iview";
 
+// 获取cookie
+const cookies = {};
+(function fetchCookie() { // eslint-disable-line
+  const cookie = document.cookie; // eslint-disable-line
+  cookie.split(";").forEach(c => {
+    const field = c.split("=");
+    cookies[field[0]] = field[1];
+  });
+})();
+
+// 创建axios实例
 const instance = axios.create({
+  headers: {
+    "x-csrf-token": cookies.csrfToken
+  },
   timeout: 3000,
   validateStatus: () => { return true; }
 });
@@ -9,7 +23,7 @@ const instance = axios.create({
 instance.interceptors.response.use((res) => {
   if (res.status < 200 || res.status >= 300 || res.data.code < 200 || res.data.code >= 300) {
     if (instance.message) {
-      Notice.info({
+      Message.info({
         message: `${res.data.msg}`
       });
     }
