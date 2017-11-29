@@ -8,7 +8,6 @@ module.exports = {
     immediate: true
   },
   async task(ctx) {
-    ctx.logger.info(`${new Date()} start schedule sf_blog`);
     const res = await ctx.curl(`${ctx.app.config.custom.sfHost}/u/leodreamer/articles`);
     const html = Buffer.from(res.data).toString("utf8");
     const $ = cheerio.load(html);

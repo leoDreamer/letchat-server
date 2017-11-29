@@ -87,6 +87,7 @@
             .content {
                 margin: 10px;
                 font-size: 16px;
+                text-align: left;
                 span {
                     width: 20px;
                     display: inline-block;

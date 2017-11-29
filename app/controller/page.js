@@ -7,7 +7,7 @@ module.exports = app => {
         "/chat": "chat"
       };
 
-      await ctx.render(pagesMap[path]);
+      await ctx.render(pagesMap[path], { global: JSON.stringify({ user: ctx.state.auth.user }) });
     }
   }
 

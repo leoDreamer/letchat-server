@@ -4,7 +4,7 @@ module.exports = app => {
   // api
   app.post(`${prefix}/auth/register`, app.controller.auth.register);
   app.post(`${prefix}/auth/login`, app.controller.auth.login);
-  app.get(`${prefix}/auth/logout`, app.controller.auth.logout);
+  app.post(`${prefix}/auth/logout`, app.controller.auth.logout);
 
   // publick assets
   app.get("/data/index", app.controller.public.indexData);
