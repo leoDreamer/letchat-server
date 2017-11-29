@@ -7,7 +7,7 @@
             </Input>
         </FormItem>
         <FormItem prop="nick_name">
-            <Input type="text" v-model="formInline.nick_name" placeholder="用户昵称">
+            <Input type="text" v-model="formInline.nickName" placeholder="用户昵称">
                 <Icon type="ios-person-outline" slot="prepend"></Icon>
             </Input>
         </FormItem>
@@ -57,7 +57,7 @@
                 nickName: this.formInline.nickName
               }).then(resp => {
                 this.$store.commit("setUser", resp.data);
-                this.$parent.$emit("COVER_CLICK");
+                this.$root.$emit("COVER_CLOSE");
               })
           })
         }

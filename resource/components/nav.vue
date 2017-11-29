@@ -31,53 +31,54 @@
                 <li @click="login('out')">退出</li>
             </ul>
         </Menu>
-        <div class="cover" @click="coverClick"  v-show="coverShow"></div>
+        <comp-cover></comp-cover>
         <comp-login v-if="loginShow"></comp-login>
     </div>
 </template>
 <script>
     import Login from "./login";
+    import Cover from "./cover"
     export default {
         name: "PageNav",
         data () {
             return {
                 theme1: 'dark',
                 loginTipShow: false,
-                coverShow: false,
                 loginShow: false
             }
         },
         components: {
-            "comp-login": Login
+            "comp-login": Login,
+            "comp-cover": Cover
         },
         mounted () {
-            this.$on("COVER_CLICK", () => {
+            if(global.user) this.$store.commit("setUser", global.user);
+            this.$on("COVER_CLOSE", () => {
                 this.loginTipShow = false;
                 this.loginShow = false;
-                this.coverShow = false;
             })
         },
         methods: {
             converLoginShow: function() {
                 this.loginTipShow = !this.loginTipShow;
-                this.coverShow = this.loginTipShow;
+                this.$root.$emit("COVER_SHOW")
             },
             coverClick: function() {
-                this.coverShow = false;
-                this.$emit("COVER_CLICK")
+                this.$root.$emit("COVER_CLOSE")
             },
             login: function(type) {
                 this.loginTipShow = false;
                 if (type === "in") {
-                    // TODO 全局Message使用失败
-                    // if (this.$store.state.user.id) {
-                    //     this.$Message.info('您已登录,请先退出登录');
-                    // }
+                    if (this.$store.state.user.id) {
+                        this.$Notice.open({
+                            title: '您已登录,请先退出登录'
+                        });
+                    }
                     this.loginShow = true;
                 } else {
                     this.axios.post("/auth/logout");
                     this.$store.commit("setUser", { name: "Leo" });
-                    this.$emit("COVER_CLICK")
+                    this.$root.$emit("COVER_CLOSE")
                 }
             }
         }

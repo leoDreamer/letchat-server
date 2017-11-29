@@ -1,25 +1,22 @@
 import Vue from "vue";
 import App from "./app";
 import Vuex from "vuex";
-import { stores } from "./store";
+import { stores } from "./js/store";
+import VueAxios from "vue-axios";
+import axios from "assets/axios";
 import "root/node_modules/iview/dist/styles/iview.css";
 
 // vuex
 Vue.use(Vuex);
+Vue.use(VueAxios, axios);
 
 // 按需引入iview组件
-import { Card, Timeline, Menu, Icon, Progress, Button } from "iview";
-import { Row, Col } from "iview/src/components/grid";
-Vue.component("Card", Card);
-Vue.component("Timeline", Timeline);
-Vue.component("MenuItem", Menu.Item);
-Vue.component("Menu", Menu);
-Vue.component("Row", Row);
-Vue.component("Col", Col);
-Vue.component("Icon", Icon);
+import { Button, Form, Input, Icon } from "iview";
+Vue.component("Form", Form);
+Vue.component("FormItem", Form.Item);
+Vue.component("Input", Input);
 Vue.component("Button", Button);
-Vue.component("TimelineItem", Timeline.Item);
-Vue.component("Progress", Progress);
+Vue.component("Icon", Icon);
 
 // init vuex
 const store = new Vuex.Store(stores);
