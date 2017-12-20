@@ -1,5 +1,5 @@
 <template>
-  <div class="login_content">
+  <div class="login_content" v-show="loginShow">
     <Form ref="formInline" :model="formInline" :rules="ruleInline">
         <FormItem prop="user">
             <Input type="text" v-model="formInline.user" placeholder="用户名">
@@ -27,6 +27,7 @@
       name: "Login",
       data () {
         return {
+          loginShow: false,
           formInline: {
               user: '',
               password: '',
@@ -47,6 +48,14 @@
           }
         }
       },
+      mounted () {
+          this.$root.$on("LOGIN_SHOW", () => {
+              this.loginShow = true;
+          })
+          this.$root.$on("LOGIN_CLOSE", () => {
+              this.loginShow = false;
+          })
+      },
       methods: {
         handleSubmit(name) {
           this.$refs[name].validate((valid) => {
@@ -58,6 +67,7 @@
               }).then(resp => {
                 this.$store.commit("setUser", resp.data);
                 this.$root.$emit("COVER_CLOSE");
+                this.$root.$emit("LOGIN_CLOSE");
               })
           })
         }

@@ -1,12 +1,13 @@
 const stores = {
   state: {
-    count: 0
+    user: window.global.user || {} // eslint-disable-line
   },
   mutations: {
-    increment (state) {
-      state.count++;
+    setUser (state, user) {
+      this._vm.$set(state, "user", user);
     }
-  }
+  },
+  actions: {}
 };
 
 export {

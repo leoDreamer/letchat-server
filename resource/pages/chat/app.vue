@@ -1,15 +1,16 @@
 <template>
     <div class="chat_out_content">
-        <comp-login v-if="show.login"></comp-login>
+        <comp-login></comp-login>
+        <comp-cover></comp-cover>
         <div class="chat_mian_content">
             <div class="header">
                 <span>好友</span>
                 <span style="font-size:20px">ChatRoom</span>
-                <span >{{user.nickName}}</span>
+                <span >{{user.nick_name}}</span>
             </div>
             <div class="chat_content">
                 <div class="content" v-for="(msg, index) in msgs" key="msg + index">
-                    <p>{{msg.user}} :</p>
+                    <p v-bind:class="{'user_self': msg.user === user.nick_name}">{{msg.user}} :</p>
                     <span class="msg_content">{{msg.msg}}</span>
                 </div>
             </div>
@@ -19,21 +20,19 @@
 </template>
 <script>
     import Login from "components/login";
+    import Cover from "components/cover";
     export default {
         name: "App",
         data () {
             return {
-                user: "",
-                show: {
-                    login: false
-                },
+                user: {},
                 msg: "",
                 msgs: [
                     {
                         user: "用户1",
                         msg: "握草握草握草握草握草握草握草握草握草握草"
                     },{
-                        user: "用户1",
+                        user: "没有昵称呢",
                         msg: "握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草"
                     },{
                         user: "用户1",
@@ -43,13 +42,15 @@
             }
         },
         components: {
-            "comp-login": Login
+            "comp-login": Login,
+            "comp-cover": Cover
         },
         mounted () {
-            if (!global.user) {
-                this.show.login = true;
+            if (!window.global.user) {
+                this.$root.$emit("LOGIN_SHOW")
+                this.$root.$emit("COVER_SHOW")
             } else {
-                this.$set(this, "user", global.user);
+                this.$set(this, "user", window.global.user);
             }
         }
     }
@@ -98,6 +99,9 @@
                 display: inline-block;
                 padding: 4px 6px;
                 background-color: #ffffff;
+            }
+            .user_self {
+                color: blue
             }
         }
     }
