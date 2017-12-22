@@ -75,5 +75,19 @@ module.exports = appInfo => {
     sfHost: "https://segmentfault.com"
   };
 
+  config.io = {
+    namespace: {
+      "/": {
+        connectionMiddleware: [],
+        packetMiddleware: []
+      },
+      "/chatio": {
+        connectionMiddleware: [],
+        packetMiddleware: []
+      }
+    },
+    redis: config.redis
+  };
+
   return config;
 };

@@ -21,7 +21,7 @@ module.exports = {
       posts.push({
         title: tag.text(),
         path: tag.attr("href"),
-        publish_date: new Date(new Date().getFullYear +
+        publish_date: new Date(new Date().getFullYear() +
           "/" + $(dateTages[index]).text().replace(/年|月|日/g, () => "/"))
       });
     });

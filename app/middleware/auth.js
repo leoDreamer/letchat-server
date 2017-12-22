@@ -4,7 +4,6 @@ const TOKEN = "access_token";
 module.exports = option => function* (next) {
   const token = this.cookies.get(TOKEN) || this.headers[TOKEN];
 
-
   this.state.auth = Object.assign({ token }, this.state.auth);
   const ret = yield this.app.redis.get(`${option.prefix}:${token}`);
   if (!ret) {

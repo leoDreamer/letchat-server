@@ -27,3 +27,8 @@ exports.webpack = {
     enable: false,
     package: "egg-webpack"
 };
+
+exports.io = {
+    enable: true,
+    package: "egg-socket.io",
+};

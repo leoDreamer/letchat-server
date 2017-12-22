@@ -21,6 +21,17 @@
 <script>
     import Login from "components/login";
     import Cover from "components/cover";
+    import io from 'socket.io-client';
+    const socket = io('http://127.0.0.1:7001');
+    socket.on('connect', () => {
+        console.log('connect!');
+        socket.emit('chat', 'hello world!');
+    });
+    socket.on('res', () => {
+        console.log('res from server: %s!', msg);
+    });
+
+
     export default {
         name: "App",
         data () {
@@ -30,13 +41,16 @@
                 msgs: [
                     {
                         user: "用户1",
-                        msg: "握草握草握草握草握草握草握草握草握草握草"
+                        msg: "握草握草握草握草握草握草握草握草握草握草",
+                        type: 'u'
                     },{
                         user: "没有昵称呢",
-                        msg: "握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草"
+                        msg: "握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草",
+                        type: 'u'
                     },{
                         user: "用户1",
-                        msg: "握草握草握草握草握草握草握草握草握草握草"
+                        msg: "握草握草握草握草握草握草握草握草握草握草",
+                        type: 'u'
                     }
                 ]
             }
@@ -46,6 +60,9 @@
             "comp-cover": Cover
         },
         mounted () {
+            socket.emit('chat', 'tobi', (data) => {
+                console.log('page emit enter', data); // data will be 'woot'
+            });
             if (!window.global.user) {
                 this.$root.$emit("LOGIN_SHOW")
                 this.$root.$emit("COVER_SHOW")
