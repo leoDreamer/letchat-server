@@ -1,14 +1,11 @@
 import Vue from "vue";
 import App from "./app";
 import Vuex from "vuex";
-import { stores } from "./js/store";
-import VueAxios from "vue-axios";
-import axios from "assets/axios";
+import { stores } from "./store";
 import "root/node_modules/iview/dist/styles/iview.css";
 
 // vuex
 Vue.use(Vuex);
-Vue.use(VueAxios, axios);
 
 // 按需引入iview组件
 import { Button, Form, Input, Icon, Message } from "iview";

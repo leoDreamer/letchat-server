@@ -37,7 +37,6 @@
 </template>
 <script>
     import Login from "./login";
-    import Cover from "./cover"
     export default {
         name: "PageNav",
         data () {
@@ -47,12 +46,10 @@
             }
         },
         components: {
-            "comp-login": Login,
-            "comp-cover": Cover
+            "comp-login": Login
         },
         mounted () {
-            if(global.user) this.$store.commit("setUser", global.user);
-            this.$on("COVER_CLOSE", () => {
+            this.$on("COVER_CLICK", () => {
                 this.loginTipShow = false;
                 this.$root.$emit("LOGIN_CLOSE")
             })
@@ -60,10 +57,11 @@
         methods: {
             converLoginShow: function() {
                 this.loginTipShow = !this.loginTipShow;
-                this.$root.$emit("COVER_SHOW")
+                this.coverShow = this.loginTipShow;
             },
             coverClick: function() {
-                this.$root.$emit("COVER_CLOSE")
+                this.coverShow = false;
+                this.$emit("COVER_CLICK")
             },
             login: function(type) {
                 this.loginTipShow = false;
@@ -76,7 +74,7 @@
                 } else {
                     this.axios.post("/auth/logout");
                     this.$store.commit("setUser", { name: "Leo" });
-                    this.$root.$emit("COVER_CLOSE")
+                    this.$emit("COVER_CLICK")
                 }
             }
         }

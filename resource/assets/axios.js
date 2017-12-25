@@ -6,7 +6,7 @@ const cookies = {};
   const cookie = document.cookie; // eslint-disable-line
   cookie.split(";").forEach(c => {
     const field = c.split("=");
-    cookies[field[0].replace(/(^\s*)|(\s*$)/g, "")] = field[1];
+    cookies[field[0]] = field[1];
   });
 })();
 

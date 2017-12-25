@@ -109,7 +109,12 @@
     }
 </script>
 <style rel="stylesheet/scss" lang="scss">
-    .chat_out_content {
+    * {
+        border: 0px;
+        padding: 0px;
+        margin: 0px;
+    };
+    .router_view {
         width: 100%;
         height: 100%;
         background-color: #f1f1f1;
