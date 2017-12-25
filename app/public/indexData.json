@@ -93,25 +93,10 @@
           }
       ],
       "projects": [
-          {
-            "name": "chat",
-            "description": "一个基于sockt.io的聊天室一个基于sockt.io的聊天室一个基于sockt.io的聊天室一个基于sockt.io的聊天室一个基于sockt.io的聊天室一个基于sockt.io的聊天室",
-            "date": "2017-11-23",
-            "path": "/chat"
-          }, {
-            "name": "test3",
+        {
+            "name": "chatRoom",
             "description": "一个基于sockt.io的聊天室",
-            "date": "2017-11-23",
-            "path": "/chat"
-        }, {
-            "name": "test2",
-            "description": "一个基于sockt.io的聊天室一个基于sockt.io的聊天室",
-            "date": "2017-11-23",
-            "path": "/chat"
-        }, {
-            "name": "test1",
-            "description": "一个基于sockt.io的聊天室一个基于sockt.io的聊天室一个基于sockt.io的聊天室一个基于sockt.io的聊天室一个基于sockt.io的聊天室",
-            "date": "2017-11-23",
+            "date": "2017-12-25",
             "path": "/chat"
         }
       ]

@@ -1,11 +1,15 @@
-exports.index = async function() {
-  const message = this.args[0];
-  console.log('11111111111111 controller index')
-  await this.socket.emit('res', `Hi! I've got your message: ${message}`);
+exports.login = async function() {
+  const user = this.args[0];
+  this.app.io.sockets.emit("login", {
+    name: user.name
+  });
 };
 
-exports.connect = async function() {
+exports.logout = async function() {
+  console.log("logout");
+};
+
+exports.message = async function() {
   const message = this.args[0];
-  console.log('11111111111111 controller index')
-  await this.socket.emit('res', `Hi! I've got your message: ${message}`);
+  this.app.io.sockets.emit("message", message);
 };

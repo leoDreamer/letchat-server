@@ -11,12 +11,13 @@ Vue.use(Vuex);
 Vue.use(VueAxios, axios);
 
 // 按需引入iview组件
-import { Button, Form, Input, Icon } from "iview";
+import { Button, Form, Input, Icon, Message } from "iview";
 Vue.component("Form", Form);
 Vue.component("FormItem", Form.Item);
 Vue.component("Input", Input);
 Vue.component("Button", Button);
 Vue.component("Icon", Icon);
+Vue.prototype.$Message = Message;
 
 // init vuex
 const store = new Vuex.Store(stores);

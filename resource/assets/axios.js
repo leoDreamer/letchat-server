@@ -1,5 +1,4 @@
 import axios from "axios";
-import { Message } from "iview";
 
 // 获取cookie
 const cookies = {};
@@ -22,11 +21,11 @@ const instance = axios.create({
 
 instance.interceptors.response.use((res) => {
   if (res.status < 200 || res.status >= 300 || res.data.code < 200 || res.data.code >= 300) {
-    if (instance.message) {
-      Message.info({
-        message: `${res.data.msg}`
-      });
-    }
+    // if (instance.message) {
+    //   Message.info({
+    //     message: `${res.data.msg}`
+    //   });
+    // }
 
     // 暂不抛出错误
     // const error = new Error();

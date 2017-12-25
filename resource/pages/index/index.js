@@ -38,6 +38,8 @@ const router = new Router({
 const store = new Vuex.Store(stores);
 Vue.config.debug = true;
 
+Vue.prototype.$Message = Message;
+
 // init vue
 new Vue({
     el: "#app",

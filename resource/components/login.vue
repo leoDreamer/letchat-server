@@ -31,7 +31,7 @@
           formInline: {
               user: '',
               password: '',
-              nickName: "没有昵称呢"
+              nickName: ""
           },
           ruleInline: {
             user: [
@@ -61,13 +61,17 @@
           this.$refs[name].validate((valid) => {
               if (!valid) return;
               this.axios.post("/auth/login", {
-                name: this.formInline.user,
                 passwd: this.formInline.password,
-                nickName: this.formInline.nickName
+                name: this.formInline.nickName
               }).then(resp => {
-                this.$store.commit("setUser", resp.data);
+                if (resp.data.code !== 200) {
+                  this.$Message.info(resp.data.message)
+                  return;
+                }
+                this.$store.commit("setUser", resp.data.data);
                 this.$root.$emit("COVER_CLOSE");
                 this.$root.$emit("LOGIN_CLOSE");
+                this.$root.$emit("LOGIN_DONE", resp.data.data)
               })
           })
         }

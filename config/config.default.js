@@ -78,12 +78,8 @@ module.exports = appInfo => {
   config.io = {
     namespace: {
       "/": {
-        connectionMiddleware: [],
-        packetMiddleware: []
-      },
-      "/chatio": {
-        connectionMiddleware: [],
-        packetMiddleware: []
+        connectionMiddleware: ["auth"],
+        packetMiddleware: ["auth"]
       }
     },
     redis: config.redis

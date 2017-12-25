@@ -6,15 +6,20 @@
             <div class="header">
                 <span>好友</span>
                 <span style="font-size:20px">ChatRoom</span>
-                <span >{{user.nick_name}}</span>
+                <span >{{user.name}}</span>
             </div>
-            <div class="chat_content">
+            <div class="chat_content" id="chat_conent">
                 <div class="content" v-for="(msg, index) in msgs" key="msg + index">
-                    <p v-bind:class="{'user_self': msg.user === user.nick_name}">{{msg.user}} :</p>
-                    <span class="msg_content">{{msg.msg}}</span>
+                    <div v-if="msg.type === 'u'">
+                        <p v-bind:class="{'user_self': msg.user === user.name}">{{msg.user}} :</p>
+                        <span class="msg_content">{{msg.msg}}</span>
+                    </div>
+                    <div v-if="msg.type === 's'" class="system_msg">
+                        <span>系统消息: {{msg.msg}}</span>
+                    </div>
                 </div>
             </div>
-            <Input v-model="msg" icon="ios-paperplane" placeholder="输入信息" class="input" size="large"></Input>
+            <Input v-model="msg" icon="ios-paperplane" placeholder="输入信息" class="input" size="large" on-click="sendMsg"></Input>
         </div>
     </div>
 </template>
@@ -23,14 +28,6 @@
     import Cover from "components/cover";
     import io from 'socket.io-client';
     const socket = io('http://127.0.0.1:7001');
-    socket.on('connect', () => {
-        console.log('connect!');
-        socket.emit('chat', 'hello world!');
-    });
-    socket.on('res', () => {
-        console.log('res from server: %s!', msg);
-    });
-
 
     export default {
         name: "App",
@@ -40,17 +37,8 @@
                 msg: "",
                 msgs: [
                     {
-                        user: "用户1",
-                        msg: "握草握草握草握草握草握草握草握草握草握草",
-                        type: 'u'
-                    },{
-                        user: "没有昵称呢",
-                        msg: "握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草握草",
-                        type: 'u'
-                    },{
-                        user: "用户1",
-                        msg: "握草握草握草握草握草握草握草握草握草握草",
-                        type: 'u'
+                        msg: "socket聊天室demo",
+                        type: 's'
                     }
                 ]
             }
@@ -60,14 +48,62 @@
             "comp-cover": Cover
         },
         mounted () {
-            socket.emit('chat', 'tobi', (data) => {
-                console.log('page emit enter', data); // data will be 'woot'
-            });
+            // 将user信息注入到data
             if (!window.global.user) {
                 this.$root.$emit("LOGIN_SHOW")
                 this.$root.$emit("COVER_SHOW")
+                this.$root.$on("LOGIN_DONE", (data) =>{
+                    this.$set(this, "user", data);
+                })
             } else {
                 this.$set(this, "user", window.global.user);
+            }
+            // 触发消息发送
+            this.$children[2].$on("on-click", () => {
+                if(this.msg === "") alert("请输入消息")
+                socket.emit('message', {
+                    userId: this.user.id,
+                    name: this.user.name,
+                    msg: this.msg
+                });
+                this.msg = "";
+            })
+            this.$children[2].$on("on-enter", () => {
+                socket.emit('message', {
+                    userId: this.user.id,
+                    name: this.user.name,
+                    msg: this.msg
+                });
+                this.msg = "";
+            })
+
+            // 监听消息推送
+            socket.on("message", (data) => {
+                this.msgs.push({
+                    user: data.name,
+                    type: 'u',
+                    msg: data.msg
+                })
+            })
+
+            // 监听消息推送
+            socket.on("login", (data) => {
+                this.msgs.push({
+                    type: 's',
+                    msg: `${data.name}加入了聊天`
+                })
+            })
+        },
+        methods: {
+        },
+        watch: {
+            user: function (newUser) {
+                if (newUser) socket.emit('login', newUser)
+            },
+            msgs: function(msgs) {
+                this.$nextTick(() => {
+                    document.getElementById('chat_conent').scrollTop = document.getElementById('chat_conent').scrollHeight;
+                })
             }
         }
     }
@@ -86,7 +122,7 @@
         max-height: 800px;
         width: 100%;
         height: 99%;
-        background-color: #9e9e9e;
+        background-color: #ecebeb;
         border: 1px solid #333;
         border-radius: 10px;
         overflow: hidden;
@@ -107,8 +143,10 @@
         .chat_content {
             width: 100%;
             flex-grow: 1;
-            padding: 20px 20px;
+            padding: 20px 20px 20px 0px;
             background-color: #ecebeb;
+            overflow-y: scroll;
+            margin-left: 20px;
             .content {
                 margin: 10px 0px;
             }
@@ -119,6 +157,10 @@
             }
             .user_self {
                 color: blue
+            }
+            .system_msg {
+                text-align: center;
+                color: red;
             }
         }
     }

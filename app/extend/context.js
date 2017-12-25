@@ -12,6 +12,25 @@ module.exports = {
         };
     },
 
+    // error包装
+    error(expression, message, code, status = 200) {
+        /* istanbul ignore else */
+        if (expression) {
+          return;
+        }
+
+        this.assert(message && typeof message === "string");
+        this.assert(code && typeof code === "number");
+
+        this.type = "json";
+        const err = Object.assign(new Error(message), {
+          code,
+          status
+        });
+
+        this.throw(err);
+      },
+
     // 生成token
     genToken (userId, ip) {
         const expire = new Date(moment().add(1, "days"));

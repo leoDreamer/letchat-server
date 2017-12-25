@@ -15,9 +15,12 @@ module.exports = app => {
       type: INTEGER,
       default: 0
     },
-    name: STRING(30),
     passwd: STRING(32),
-    nick_name: STRING(32),
+    name: {
+      type: STRING(32),
+      allowNull: false,
+      unique: true
+    },
     created_at: DATE,
     updated_at: DATE
   });

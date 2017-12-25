@@ -32,7 +32,7 @@
             </ul>
         </Menu>
         <comp-cover></comp-cover>
-        <comp-login v-if="loginShow"></comp-login>
+        <comp-login></comp-login>
     </div>
 </template>
 <script>
@@ -43,8 +43,7 @@
         data () {
             return {
                 theme1: 'dark',
-                loginTipShow: false,
-                loginShow: false
+                loginTipShow: false
             }
         },
         components: {
@@ -55,7 +54,7 @@
             if(global.user) this.$store.commit("setUser", global.user);
             this.$on("COVER_CLOSE", () => {
                 this.loginTipShow = false;
-                this.loginShow = false;
+                this.$root.$emit("LOGIN_CLOSE")
             })
         },
         methods: {
@@ -70,11 +69,10 @@
                 this.loginTipShow = false;
                 if (type === "in") {
                     if (this.$store.state.user.id) {
-                        this.$Notice.open({
-                            title: '您已登录,请先退出登录'
-                        });
+                        this.$Message.info('您已登录,请先退出登录');
+                        return;
                     }
-                    this.loginShow = true;
+                    this.$root.$emit("LOGIN_SHOW")
                 } else {
                     this.axios.post("/auth/logout");
                     this.$store.commit("setUser", { name: "Leo" });
