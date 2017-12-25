@@ -12,12 +12,4 @@ module.exports = app => {
   // page
   app.get("/index", app.controller.page.index);
   app.get("/chat", app.controller.page.index);
-
-  // socket
-  console.log('1111111', app.io.controller.chat.index)
-  app.io.route("chat", require("./io/controller/chat").index);
-  // app.io.route("connect", app.io.controller.chat.connect);
-
-  // app.io.of('/chat')
-  // app.io.of('/chat').route('chat', app.io.controller.chat.index);
 };
