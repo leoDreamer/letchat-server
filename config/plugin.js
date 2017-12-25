@@ -30,5 +30,5 @@ exports.webpack = {
 
 exports.io = {
     enable: true,
-    package: "egg-socket.io",
+    package: "egg-socket.io"
 };

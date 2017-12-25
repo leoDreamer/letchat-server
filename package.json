@@ -67,7 +67,7 @@
   "scripts": {
     "start": "egg-scripts start",
     "stop": "egg-scripts stop",
-    "dev": "egg-bin dev --sticky",
+    "dev": "egg-bin dev",
     "debug": "egg-bin debug",
     "build": "webpack --config build/webpack.prod.js",
     "watch": "webpack --config build/webpack.dev.js -w",

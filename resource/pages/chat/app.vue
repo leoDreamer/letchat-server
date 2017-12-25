@@ -27,7 +27,7 @@
     import Login from "components/login";
     import Cover from "components/cover";
     import io from 'socket.io-client';
-    const socket = io('http://127.0.0.1:7001');
+    const socket = io();
 
     export default {
         name: "App",
