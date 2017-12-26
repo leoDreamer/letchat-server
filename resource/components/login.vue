@@ -86,7 +86,7 @@
     font-size: 12px;
     padding: 20px;
     z-index: 101;
-    width: 400px;
+    width: 300px;
     height: 250px;
     border-radius: 10px;
     text-align: center;

@@ -4,11 +4,12 @@
         <comp-cover></comp-cover>
         <div class="chat_mian_content">
             <div class="header">
-                <span>好友</span>
+                <span @click="friendsList" v-show="showChat">好友</span>
+                <Icon type="chevron-left" @click.native="friendsList" v-show="!showChat" class="back"></Icon>
                 <span style="font-size:20px">ChatRoom</span>
                 <span >{{user.name}}</span>
             </div>
-            <div class="chat_content" id="chat_conent">
+            <div class="chat_content" id="chat_conent"  v-show="showChat">
                 <div class="content" v-for="(msg, index) in msgs" key="msg + index">
                     <div v-if="msg.type === 'u'">
                         <p v-bind:class="{'user_self': msg.user === user.name}">{{msg.user}} :</p>
@@ -19,7 +20,13 @@
                     </div>
                 </div>
             </div>
-            <Input v-model="msg" icon="ios-paperplane" placeholder="输入信息" class="input" size="large" on-click="sendMsg"></Input>
+            <div class="chat_content" v-show="!showChat">
+                哈哈哈,好友功能还在做呢
+            </div>
+            <Input v-model="msg" icon="ios-paperplane" 
+                placeholder="输入信息" class="input" size="large" 
+                on-click="sendMsg"  v-show="showChat">
+            </Input>
         </div>
     </div>
 </template>
@@ -34,6 +41,7 @@
         data () {
             return {
                 user: {},
+                showChat: true,
                 msg: "",
                 msgs: [
                     {
@@ -95,6 +103,9 @@
             })
         },
         methods: {
+            friendsList: function() {
+                this.showChat = !this.showChat
+            }
         },
         watch: {
             user: function (newUser) {
@@ -123,14 +134,12 @@
         width: 100%;
         height: 99%;
         background-color: #ecebeb;
-        border: 1px solid #333;
-        border-radius: 10px;
         overflow: hidden;
         display: flex;
         flex-direction: column;
         .header{
             width: 100%;
-            padding: 20px 20px;
+            padding: 10px 10px;
             background-color: #3a3838;
             color: #ffffff;
             display: flex;
@@ -138,6 +147,10 @@
             user-select: none;
             span {
                 line-height: 20px;
+            }
+            .back {
+                line-height: 20px;
+                width: 20px;
             }
         }
         .chat_content {
