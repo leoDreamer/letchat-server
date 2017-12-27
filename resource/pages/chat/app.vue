@@ -20,12 +20,13 @@
                     </div>
                 </div>
             </div>
-            <div class="chat_content" v-show="!showChat">
-                哈哈哈,好友功能还在做呢
+            <div class="chat_content firends_content" v-show="!showChat">
+                <ul>
+                    <li>在线总人数: {{onlineUsers.length}} 人</li>
+                    <li v-for="u in onlineUsers">{{u.name}}</li>
+                </ul>
             </div>
-            <Input v-model="msg" icon="ios-paperplane" 
-                placeholder="输入信息" class="input" size="large" 
-                on-click="sendMsg"  v-show="showChat">
+            <Input v-model="msg" icon="ios-paperplane" placeholder="输入信息" class="input" size="large" v-show="showChat">
             </Input>
         </div>
     </div>
@@ -43,6 +44,7 @@
                 user: {},
                 showChat: true,
                 msg: "",
+                onlineUsers: [],
                 msgs: [
                     {
                         msg: "socket聊天室demo",
@@ -67,8 +69,8 @@
                 this.$set(this, "user", window.global.user);
             }
             // 触发消息发送
-            this.$children[2].$on("on-click", () => {
-                if(this.msg === "") alert("请输入消息")
+            this.$children[this.$children.length - 1].$on("on-click", () => {
+                if(this.msg === "") return this.$Message.info("请输入消息内容")
                 socket.emit('message', {
                     userId: this.user.id,
                     name: this.user.name,
@@ -76,7 +78,8 @@
                 });
                 this.msg = "";
             })
-            this.$children[2].$on("on-enter", () => {
+            this.$children[this.$children.length - 1].$on("on-enter", () => {
+                if(this.msg === "") return this.$Message.info("请输入消息内容")
                 socket.emit('message', {
                     userId: this.user.id,
                     name: this.user.name,
@@ -99,6 +102,14 @@
                 this.msgs.push({
                     type: 's',
                     msg: `${data.name}加入了聊天`
+                })
+            })
+
+            // 在线好友
+            socket.on("online_user", (data) => {
+                this.onlineUsers = [];
+                data.users.map(u => {
+                    this.onlineUsers.push(u);
                 })
             })
         },
@@ -151,6 +162,13 @@
             .back {
                 line-height: 20px;
                 width: 20px;
+            }
+        }
+        .firends_content{
+            text-align: center;
+            li {
+                line-height: 30px;
+                border-bottom: 1px solid #dad4d4;
             }
         }
         .chat_content {

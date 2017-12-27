@@ -35,11 +35,12 @@
           },
           ruleInline: {
             user: [
-              { required: true, message: '用户名为必填', trigger: 'blur' },
+              { required: false, message: '用户名为必填', trigger: 'blur' },
               { type: 'string', min: 3, message: '用户名最小为3位', trigger: 'blur' }
             ],
             nick_name: [
-              { required: false, message: '昵称为必填', trigger: 'blur' }
+              { required: false, message: '昵称为必填', trigger: 'blur' },
+              { type: 'string', min: 3, message: '用户名最小为3位', trigger: 'blur' }
             ],
             password: [
               { required: true, message: '密码为必填', trigger: 'blur' },
