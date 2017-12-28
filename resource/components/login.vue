@@ -35,11 +35,12 @@
           },
           ruleInline: {
             user: [
-              { required: true, message: '用户名为必填', trigger: 'blur' },
+              { required: false, message: '用户名为必填', trigger: 'blur' },
               { type: 'string', min: 3, message: '用户名最小为3位', trigger: 'blur' }
             ],
             nick_name: [
-              { required: false, message: '昵称为必填', trigger: 'blur' }
+              { required: false, message: '昵称为必填', trigger: 'blur' },
+              { type: 'string', min: 3, message: '用户名最小为3位', trigger: 'blur' }
             ],
             password: [
               { required: true, message: '密码为必填', trigger: 'blur' },
@@ -86,7 +87,7 @@
     font-size: 12px;
     padding: 20px;
     z-index: 101;
-    width: 400px;
+    width: 300px;
     height: 250px;
     border-radius: 10px;
     text-align: center;

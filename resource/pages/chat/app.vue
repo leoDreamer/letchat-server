@@ -4,11 +4,12 @@
         <comp-cover></comp-cover>
         <div class="chat_mian_content">
             <div class="header">
-                <span>好友</span>
+                <span @click="friendsList" v-show="showChat">好友</span>
+                <Icon type="chevron-left" @click.native="friendsList" v-show="!showChat" class="back"></Icon>
                 <span style="font-size:20px">ChatRoom</span>
                 <span >{{user.name}}</span>
             </div>
-            <div class="chat_content" id="chat_conent">
+            <div class="chat_content" id="chat_conent"  v-show="showChat">
                 <div class="content" v-for="(msg, index) in msgs" key="msg + index">
                     <div v-if="msg.type === 'u'">
                         <p v-bind:class="{'user_self': msg.user === user.name}">{{msg.user}} :</p>
@@ -19,7 +20,14 @@
                     </div>
                 </div>
             </div>
-            <Input v-model="msg" icon="ios-paperplane" placeholder="输入信息" class="input" size="large" on-click="sendMsg"></Input>
+            <div class="chat_content firends_content" v-show="!showChat">
+                <ul>
+                    <li>在线总人数: {{onlineUsers.length}} 人</li>
+                    <li v-for="u in onlineUsers">{{u.name}}</li>
+                </ul>
+            </div>
+            <Input v-model="msg" icon="ios-paperplane" placeholder="输入信息" class="input" size="large" v-show="showChat">
+            </Input>
         </div>
     </div>
 </template>
@@ -34,7 +42,9 @@
         data () {
             return {
                 user: {},
+                showChat: true,
                 msg: "",
+                onlineUsers: [],
                 msgs: [
                     {
                         msg: "socket聊天室demo",
@@ -59,8 +69,8 @@
                 this.$set(this, "user", window.global.user);
             }
             // 触发消息发送
-            this.$children[2].$on("on-click", () => {
-                if(this.msg === "") alert("请输入消息")
+            this.$children[this.$children.length - 1].$on("on-click", () => {
+                if(this.msg === "") return this.$Message.info("请输入消息内容")
                 socket.emit('message', {
                     userId: this.user.id,
                     name: this.user.name,
@@ -68,7 +78,8 @@
                 });
                 this.msg = "";
             })
-            this.$children[2].$on("on-enter", () => {
+            this.$children[this.$children.length - 1].$on("on-enter", () => {
+                if(this.msg === "") return this.$Message.info("请输入消息内容")
                 socket.emit('message', {
                     userId: this.user.id,
                     name: this.user.name,
@@ -93,8 +104,19 @@
                     msg: `${data.name}加入了聊天`
                 })
             })
+
+            // 在线好友
+            socket.on("online_user", (data) => {
+                this.onlineUsers = [];
+                data.users.map(u => {
+                    this.onlineUsers.push(u);
+                })
+            })
         },
         methods: {
+            friendsList: function() {
+                this.showChat = !this.showChat
+            }
         },
         watch: {
             user: function (newUser) {
@@ -123,14 +145,12 @@
         width: 100%;
         height: 99%;
         background-color: #ecebeb;
-        border: 1px solid #333;
-        border-radius: 10px;
         overflow: hidden;
         display: flex;
         flex-direction: column;
         .header{
             width: 100%;
-            padding: 20px 20px;
+            padding: 10px 10px;
             background-color: #3a3838;
             color: #ffffff;
             display: flex;
@@ -138,6 +158,17 @@
             user-select: none;
             span {
                 line-height: 20px;
+            }
+            .back {
+                line-height: 20px;
+                width: 20px;
+            }
+        }
+        .firends_content{
+            text-align: center;
+            li {
+                line-height: 30px;
+                border-bottom: 1px solid #dad4d4;
             }
         }
         .chat_content {
