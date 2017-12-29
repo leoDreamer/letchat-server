@@ -1,16 +1,24 @@
 version: "2.0"
 
 services: 
+    app:
+        image: letchat:latest
+        restart: always
+        ports:
+            - "80:80"
+        volumes:
+            - "/volumes/logs:/app/logs"
+        links:
+            - redis
+            - mysql
+        depends_on:
+            - redis
+            - mysql
     redis: 
         image: redis:3.2
         restart: always
         ports:
             - "6379:6379"
-    mongo: 
-        image: mongo:3.4.1
-        restart: always
-        ports: 
-            - "27017:27017"
     mysql:
         image: mysql:latest
         restart: always
