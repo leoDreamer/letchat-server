@@ -1,49 +1,20 @@
-# egg-example
+## 项目介绍
+整合开发过程中用到的相关技术,构建一个个人网站(包括个人的介绍,一些小项目),主要想要提升自己在工程构建这块的能力.
 
-### 一个初次使用Egg框架的服务端Demo,完成一个聊天室的功能,数据库使用mysql.
+## 后端
+ + 框架: Egg.js
+ + 数据库: mysql
+ + ORM框架: Sequelize
+ + 目前搭建后端服务成功,只简单写了注册登录,socket相关内容,并没有做复杂的业务
 
-### vscode debug config
-```javascript
-{
-  "version": "0.2.0",
-  "configurations": [
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Test",
-      "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
-      "args": [
-        "--recursive",
-        "-u",
-        "tdd",
-        "--timeout",
-        "999999",
-        "--colors",
-        "${workspaceRoot}/test"
-      ],
-      "internalConsoleOptions": "openOnSessionStart",
-      "env": {
-        "EGG_SERVER_ENV": "unittest"
-      }
-    },
-    {
-      "name": "Launch",
-      "type": "node",
-      "request": "launch",
-      "cwd": "${workspaceRoot}",
-      "runtimeExecutable": "npm",
-      "windows": { "runtimeExecutable": "npm.cmd" },
-      "runtimeArgs": [ "run", "debug" ],
-      "console": "integratedTerminal",
-      "protocol": "auto",
-      "restart": true,
-      "port": 9999,
-      "env": {
-        "EGG_SERVER_ENV": "local"
-      }
-    }
-  ]
-}
-```
+## 前端
+ + 框架: Webpack + Vue + Vue-router + Vuex
+ + UI框架: ivew 模块化加载
+ + 关于Webpack: 使用打包后客户端渲染,根据需求做了多入口打包成多个页面,每个SPA应用中有自己的 Router 和 Store
+
+ ## 部署
+ + 方式: 采用docker的方式进行部署
+ + 关于docker: build了两个image,一个是项目依赖的库(每次下载太浪费时间),另外一个是基于依赖库镜像的业务代码
+ + 持续集成: 计划采用持续集成的方式,在merge代码后,基于docker跑单测,lint等ci,然后自动部署(还未做)
 
 ### coding....
