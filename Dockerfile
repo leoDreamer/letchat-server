@@ -1,14 +1,13 @@
-FROM node:8.0.0
+FROM module:base
 
 RUN echo "Asia/Shanghai" > /etc/timezone
 
-RUN mkdir /app
 COPY . /app
 WORKDIR /app
 
-RUN ln -s ./node_modules /app/node_modules
+ENV NODE_ENV test
 
-ENV NODE_ENV development
+RUN npm run build
 ENV PORT 80
 
-ENTRYPOINT [ "npm run dev" ]
+ENTRYPOINT npm run dev

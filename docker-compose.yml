@@ -5,9 +5,10 @@ services:
         image: app:${tag}
         restart: always
         ports:
-            - "80:80"
+            - "80:7001"
         volumes:
-            - "/volumes/logs:/app/logs"
+            - "../volumes/logs:/app/logs"
+            - ./config:/app/config
         links:
             - redis
             - mysql
@@ -25,7 +26,7 @@ services:
         ports:
             - "3306:3306"
         environment:
-            - MYSQL_DATABASE=mysitedb
+            - MYSQL_DATABASE=egg
             - MYSQL_ROOT_PASSWORD=123456
         volumes:
             - "/data/mysql/db:/var/lib/mysql"
