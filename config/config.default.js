@@ -72,7 +72,8 @@ module.exports = appInfo => {
   };
 
   config.custom = {
-    sfHost: "https://segmentfault.com"
+    sfHost: "https://segmentfault.com",
+    huiboHost: "http://www.huibo.com/jobsearch/"
   };
 
   config.io = {

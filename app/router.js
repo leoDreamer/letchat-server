@@ -5,8 +5,9 @@ module.exports = app => {
   app.post(`${prefix}/auth/register`, app.controller.auth.register);
   app.post(`${prefix}/auth/login`, app.controller.auth.login);
   app.post(`${prefix}/auth/logout`, app.controller.auth.logout);
+  app.get(`${prefix}/spider/huibo`, app.controller.spider.huibo);
 
-  // publick assets
+  // public assets
   app.get("/data/index", app.controller.public.indexData);
 
   // page
