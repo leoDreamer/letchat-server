@@ -4,7 +4,8 @@ module.exports = app => {
       const { path } = ctx;
       const pagesMap = {
         "/index": "index",
-        "/chat": "chat"
+        "/chat": "chat",
+        "/spider": "spider"
       };
 
       await ctx.render(pagesMap[path], { global: JSON.stringify({ user: ctx.state.auth.user }) });

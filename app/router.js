@@ -13,6 +13,7 @@ module.exports = app => {
   // page
   app.get("/index", app.controller.page.index);
   app.get("/chat", app.controller.page.index);
+  app.get("/spider", app.controller.page.index);
 
   // socket
   app.io.route("login", require("./io/controller/chat").login);

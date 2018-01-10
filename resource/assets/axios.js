@@ -15,7 +15,7 @@ const instance = axios.create({
   headers: {
     "x-csrf-token": cookies.csrfToken
   },
-  timeout: 3000,
+  timeout: 30000,
   validateStatus: () => { return true; }
 });
 
