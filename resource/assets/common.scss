@@ -1,6 +1,10 @@
 // 变量
 $gray: #777777 !default;
 
+body {
+  overflow-x: hidden;
+}
+
 // 共用类样式
 .main_content {
   width: 100%;

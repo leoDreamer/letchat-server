@@ -1,10 +1,10 @@
 <template>
-    <div>
+    <div class="nav_content">
         <!-- 导航栏 -->
         <Menu mode="horizontal" :theme="theme1" active-name="1" class="index_nav">
             <span>
                 <router-link to="/" class="link_font">
-                    {{$store.state.user.name}}
+                    {{user.name}}
                 </router-link>
             </span>
             <Icon type="android-arrow-dropdown" style="color:#fff;z-index:101" @click.native="converLoginShow"></Icon>
@@ -79,11 +79,20 @@
                     this.$root.$emit("COVER_CLOSE")
                 }
             }
+        },
+        computed: {
+            user: function () {
+                if (!window.global.user) return { name: 'Leo' }
+                return window.global.user;
+            }
         }
     }
 </script>
 <style rel="stylesheet/scss" lang="scss">
     @import "../assets/common";
+    .nav_content {
+        width: 100%;
+    }
     .index_nav {
         width: 100%;
         user-select: none;

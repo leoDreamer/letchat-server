@@ -5,7 +5,7 @@ module.exports = {
   schedule: {
     interval: "2d",
     type: "worker",
-    immediate: true
+    immediate: false
   },
   async task(ctx) {
     const res = await ctx.curl(`${ctx.app.config.custom.sfHost}/u/leodreamer/articles`);

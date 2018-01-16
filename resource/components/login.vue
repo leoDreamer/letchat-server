@@ -69,6 +69,7 @@
                   this.$Message.info(resp.data.message)
                   return;
                 }
+                window.global.user = resp.data.data;
                 this.$store.commit("setUser", resp.data.data);
                 this.$root.$emit("COVER_CLOSE");
                 this.$root.$emit("LOGIN_CLOSE");

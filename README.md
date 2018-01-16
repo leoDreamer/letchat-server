@@ -9,7 +9,7 @@
 
 ## 前端
  + 框架: Webpack + Vue + Vue-router + Vuex
- + UI框架: ivew 模块化加载
+ + UI框架: iView 模块化加载
  + 关于Webpack: 使用打包后客户端渲染,根据需求做了多入口打包成多个页面,每个SPA应用中有自己的 Router 和 Store
 
  ## 部署

@@ -53,6 +53,7 @@
     @import "../../assets/common";
     .blog_content {
         text-align: center;
+        min-height: 900px;
         padding: 40px 0 40px 0;
         .col {
             border-radius: 10px;
