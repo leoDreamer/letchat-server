@@ -15,7 +15,7 @@ Vue.use(VueAxios, axios);
 
 // 按需引入iview组件
 import { Table, Timeline, Menu, Icon, Progress, Cascader,
-    Button, Form, Input, Message, Dropdown } from "iview";
+    Button, Form, Input, Message, Dropdown, Spin } from "iview";
 import { Row, Col } from "iview/src/components/grid";
 Vue.component("Table", Table);
 Vue.component("MenuItem", Menu.Item);
@@ -33,7 +33,9 @@ Vue.component("Dropdown", Dropdown);
 Vue.component("DropdownMenu", Dropdown.Menu);
 Vue.component("DropdownItem", Dropdown.Item);
 Vue.component("Cascader", Cascader);
+Vue.component("Spin", Spin);
 Vue.prototype.$Message = Message;
+window.$Message = Message;  // eslint-disable-line
 
 // init vuex
 const router = new Router({

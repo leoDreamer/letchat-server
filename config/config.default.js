@@ -10,7 +10,7 @@ module.exports = appInfo => {
   // should change to your own
   config.keys = appInfo.name + "_1501817502166_7037";
   config.noPrefix = true;
-  config.middleware = ["auth"];
+  config.middleware = ["auth", "error"];
 
   // add your config here
   config.logger = {

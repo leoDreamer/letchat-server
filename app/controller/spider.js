@@ -8,7 +8,11 @@ module.exports = app => {
     }
     async huibo(ctx) {
       ctx.validate(this.huiboRule, ctx.query);
-      const { number = 40 } = ctx.query;
+      const { number = 20 } = ctx.query;
+      if (!ctx.state.auth.user) {
+        ctx.error(number <= 20, "未登录用户最多可查询20条记录", 12001);
+      }
+      ctx.error(number <= 60, "最多可查询60条记录", 12002);
       const key = decodeURI(ctx.query.key);
       let timestamp = (new Date()).getTime();
       let jobs = [];

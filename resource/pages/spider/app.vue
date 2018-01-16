@@ -28,6 +28,7 @@
             </div>
             <Table stripe :columns="columns1" :data="jobs" class="table"></Table>
         </div>
+        <Spin size="large" fix v-if="spinShow"></Spin>
     </div>
 </template>
 <script>
@@ -39,6 +40,7 @@
                 key: "",
                 number: 20,
                 origin: "huibo",
+                spinShow: false,
                 originMap: {
                     huibo: "汇博人才网",
                     lagou: "拉钩"
@@ -155,12 +157,18 @@
                 }]
             }
         },
+        mounted () {
+            this.$children[6].$on("on-row-click", (row) => {
+                window.open(row.url);
+            })
+        },
         components: {
             "page-nav": Nav
         },
         methods: {
             search () {
                 if (!this.key) this.$Message.info("请输入搜索职位");
+                this.spinShow = true;
                 let province = "", city = "";
                 this.addrList.forEach((each, index) => {
                     if (each.value === this.addr[0]) province = this.addrList[index];
@@ -171,6 +179,9 @@
                 this.$Message.info(`您选择了 ${province.label}-${city} 地址查询,暂未支持该功能`);
                 this.axios.get(`/spider/huibo?key=${this.key}&number=${this.number}`)
                     .then(resp => {
+                        this.spinShow = false;
+                        if (!resp) return;
+                        if ( resp.data.jobs.length === 0) this.$Message.info("暂未找到条件相关职位")
                         this.jobs = resp.data.jobs;
                         this.jobs.push({});
                         this.jobs.pop();
@@ -189,6 +200,7 @@
         justify-content: center;
         flex-wrap: wrap;
         overflow-y: scroll;
+        min-width: 950px;
         height: 100%;
         margin-right: -20px;
         .condition_line {
@@ -196,13 +208,15 @@
         }
         .show_table {
             padding: 20px 0px;
-            width: 70%;
+            width: 80%;
+            overflow: hidden;
             .condition {
                 margin-bottom: 20px;
             }
             .table {
-                .ive-table {
-                    height: auto;
+                margin-right: -10px ;
+                .ivu-table {
+                    overflow: auto;
                 }
             }
             .condition_lable {

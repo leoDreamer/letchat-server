@@ -1,4 +1,5 @@
 const moment = require("moment");
+const { VError } = require("verror");
 
 module.exports = {
 
@@ -13,7 +14,7 @@ module.exports = {
     },
 
     // error包装
-    error(expression, message, code, status = 200) {
+    error(expression, message, code, status = 200, originalError) {
         /* istanbul ignore else */
         if (expression) {
           return;
@@ -23,10 +24,13 @@ module.exports = {
         this.assert(code && typeof code === "number");
 
         this.type = "json";
-        const err = Object.assign(new Error(message), {
-          code,
-          status
-        });
+        const err = Object.assign(new VError({
+            name: "custom_server_error",
+            cause: originalError
+          }, message), {
+            code,
+            status
+          });
 
         this.throw(err);
       },

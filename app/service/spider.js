@@ -35,12 +35,13 @@ module.exports = app => {
       const exp = $(job.find("p.clearfix").find("span.exp")[0]).text().replace("\n", "");
       const publicTime = $(job.find("p.clearfix").find("span.job_time")[0])
         .text().replace("\n", "");
+      const url = $(job.find("a.des_title")[0]).attr("href");
       for (let j = 0; j < requireDomList.length; j++) {
         if ($(requireDomList[j]).text() !== "") { requires.push($(requireDomList[j]).text()); }
       }
       jobs.push({
-        title, industry, name, money, address, exp, publicTime, requires,
-        url: app.config.custom.huiboHost +
+        title, industry, name, money, address, exp, publicTime, requires, url,
+        uri: app.config.custom.huiboHost +
           `?params=p${path.i}&key=${encodeURI(path.word)}&timestamp=${path.timestamp}#list`
       });
     }
