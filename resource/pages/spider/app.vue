@@ -35,6 +35,9 @@
     import Nav from "components/nav";
     export default {
         name: "App",
+        beforeCreate () {
+            this.$store.dispatch("createUser", {});
+        },
         data() {
             return {
                 key: "",
@@ -199,6 +202,7 @@
         display: flex;
         justify-content: center;
         flex-wrap: wrap;
+        align-items: flex-start;
         overflow-y: scroll;
         min-width: 950px;
         height: 100%;
@@ -217,6 +221,8 @@
                 margin-right: -10px ;
                 .ivu-table {
                     overflow: auto;
+                    height: auto;
+                    min-height: 70%;
                 }
             }
             .condition_lable {

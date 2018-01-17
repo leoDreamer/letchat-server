@@ -20,13 +20,17 @@
         name: "Project",
         data () {
             return {
-                projects: this.$store.state.projects,
                 colors: [
                     "#fd6a7f",
                     "#70c3ff",
                     "#7f8ea0",
                     "#89d04f"
                 ]
+            }
+        },
+        computed: {
+            projects () {
+                return this.$store.state.information.projects;
             }
         },
         components: {
