@@ -67,9 +67,15 @@
         data () {
           return {
               theme3: 'dark',
-              showContent: 1,
-              skill: this.$store.state.introduce.skills,
-              experience: this.$store.state.introduce.experiences
+              showContent: 1
+          }
+        },
+        computed: {
+          skill () {
+            return this.$store.state.information.introduce.skills;
+          },
+          experience () {
+            return this.$store.state.information.introduce.experiences;
           }
         },
         components: {

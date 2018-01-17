@@ -1,5 +1,5 @@
 <template>
-  <div class="login_content" v-show="loginShow">
+  <div class="login_content" v-show="loginContent">
     <Form ref="formInline" :model="formInline" :rules="ruleInline">
         <FormItem prop="user">
             <Input type="text" v-model="formInline.user" placeholder="用户名">
@@ -27,7 +27,6 @@
       name: "Login",
       data () {
         return {
-          loginShow: false,
           formInline: {
               user: '',
               password: '',
@@ -49,32 +48,18 @@
           }
         }
       },
-      mounted () {
-          this.$root.$on("LOGIN_SHOW", () => {
-              this.loginShow = true;
-          })
-          this.$root.$on("LOGIN_CLOSE", () => {
-              this.loginShow = false;
-          })
+      computed: {
+        loginContent () {
+          return this.$store.state.show.loginContent
+        }
       },
       methods: {
         handleSubmit(name) {
           this.$refs[name].validate((valid) => {
               if (!valid) return;
-              this.axios.post("/auth/login", {
-                passwd: this.formInline.password,
-                name: this.formInline.nickName
-              }).then(resp => {
-                if (resp.data.code !== 200) {
-                  this.$Message.info(resp.data.message)
-                  return;
-                }
-                window.global.user = resp.data.data;
-                this.$store.commit("setUser", resp.data.data);
-                this.$root.$emit("COVER_CLOSE");
-                this.$root.$emit("LOGIN_CLOSE");
-                this.$root.$emit("LOGIN_DONE", resp.data.data)
-              })
+              this.$store.dispatch("createUser", { name: this.formInline.nickName, passwd: this.formInline.password });
+              this.$store.commit("SHOW_PATCH", { key: "cover", value: false });
+              this.$store.commit("SHOW_PATCH", { key: "loginContent", value: false })
           })
         }
       }

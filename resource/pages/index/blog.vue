@@ -29,13 +29,17 @@
         name: "Blog",
         data () {
             return {
-                blogs: this.$store.state.blogs,
                 colors: [
                     "#fd6a7f",
                     "#70c3ff",
                     "#7f8ea0",
                     "#89d04f"
                 ]
+            }
+        },
+        computed: {
+            blogs () {
+                return this.$store.state.information.blogs;
             }
         },
         components: {

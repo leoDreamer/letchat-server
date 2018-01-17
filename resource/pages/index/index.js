@@ -5,7 +5,7 @@ import Vuex from "vuex";
 import VueAxios from "vue-axios";
 import axios from "assets/axios";
 import { routes } from "./js/router";
-import { stores } from "./js/store";
+import { stores } from "../../store";
 import "root/node_modules/iview/dist/styles/iview.css";
 
 // use router vuex axios

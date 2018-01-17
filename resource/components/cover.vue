@@ -1,25 +1,19 @@
 <template>
-  <div class="cover" @click="coverClick"  v-show="coverShow"></div>
+  <div class="cover" @click="coverClick"  v-show="cover"></div>
 </template>
 <script>
     export default {
         name: "Cover",
-        data () {
-            return {
-                coverShow: false,
+        computed: {
+            cover () {
+                return this.$store.state.show.cover;
             }
-        },
-        mounted () {
-            this.$root.$on("COVER_SHOW", () => {
-                this.coverShow = true;
-            })
-            this.$root.$on("COVER_CLOSE", () => {
-                this.coverShow = false;
-            })
         },
         methods: {
             coverClick: function() {
-                this.$root.$emit("COVER_CLOSE")
+                this.$store.commit("SHOW_PATCH", { key: "cover", value: false })
+                this.$store.commit("SHOW_PATCH", { key: "loginTip", value: false })
+                this.$store.commit("SHOW_PATCH", { key: "loginContent", value: false })
             }
         }
     }

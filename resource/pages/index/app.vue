@@ -6,7 +6,8 @@
     export default {
         name: "App",
         beforeCreate () {
-            this.$store.dispatch("initData")
+            this.$store.dispatch("createUser", {})
+            this.$store.dispatch("createInformation")
         }
     }
 </script>

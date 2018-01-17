@@ -22,7 +22,8 @@
 		"xit": true,
 		"Buffer": true,
 		"exports": true,
-		"process": true
+		"process": true,
+		"window": true
 	},	
 	"parser": "babel-eslint",
 	"parserOptions": {
@@ -38,10 +39,7 @@
 			"error",
 			"except-parens"
 		],
-		"curly": [
-			"error",
-			"all"
-		],
+		"curly": [ 0 ],
 		"object-curly-spacing": [
 			"error",
 			"always"
