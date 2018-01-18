@@ -26,7 +26,7 @@
                     <Button type="primary" @click="search">搜索</Button>
                 </div>
             </div>
-            <Table stripe :columns="columns1" :data="jobs" class="table"></Table>
+            <Table stripe :columns="columns1" @on-row-click="rowClick" :data="jobs" class="table"></Table>
         </div>
         <Spin size="large" fix v-if="spinShow"></Spin>
     </div>
@@ -160,11 +160,6 @@
                 }]
             }
         },
-        mounted () {
-            this.$children[6].$on("on-row-click", (row) => {
-                window.open(row.url);
-            })
-        },
         components: {
             "page-nav": Nav
         },
@@ -191,6 +186,9 @@
                     })
             },
             originFn (origin) {
+            },
+            rowClick (row) {
+                window.open(row.url);
             }
         }
     }

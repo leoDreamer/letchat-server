@@ -3,7 +3,8 @@ import * as types from "../types";
 const state = {
   loginTip: false,
   loginContent: false,
-  cover: false
+  cover: false,
+  chat: true
 };
 
 const getters = {};

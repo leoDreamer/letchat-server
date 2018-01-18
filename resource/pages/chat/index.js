@@ -1,7 +1,7 @@
 import Vue from "vue";
 import App from "./app";
 import Vuex from "vuex";
-import { stores } from "./js/store";
+import { stores } from "../../store/pages/chat";
 import VueAxios from "vue-axios";
 import axios from "assets/axios";
 import "root/node_modules/iview/dist/styles/iview.css";
