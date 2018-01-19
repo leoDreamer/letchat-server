@@ -4,6 +4,7 @@
         <page-nav></page-nav>
         <!-- 主要内容 -->
         <Row class="index_content main_content" type="flex" justify="center" align="middle">
+            <page-visit></page-visit>
             <transition name="content-show">
                 <Col span=24 v-if="show" style="height:300px">
                     <p class="title">Hi, &nbsp&nbsp I &nbsp&nbsp am &nbsp&nbsp Leo</p>
@@ -21,6 +22,7 @@
 </template>
 <script>
     import Nav from "components/nav";
+    import Visit from "components/visit";
     export default {
         name: "Index",
         data () {
@@ -32,7 +34,8 @@
             this.show = true;
         },
         components: {
-            "page-nav": Nav
+            "page-nav": Nav,
+            "page-visit": Visit
         }
     }
 </script>

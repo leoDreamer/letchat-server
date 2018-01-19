@@ -26,7 +26,7 @@ instance.message = true;
 instance.interceptors.response.use((res) => {
   if (res.status < 200 || res.status >= 300 || res.data.code < 200 || res.data.code >= 300) {
     if (instance.message) {
-      window.$Message.info(`${res.data.msg}`); // eslint-disable-line
+      window.$Message.info(`${res.data.msg}` || "服务器出现错误"); // eslint-disable-line
     }
 
     // 暂不抛出错误

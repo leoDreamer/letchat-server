@@ -6,6 +6,10 @@ module.exports = app => {
   app.post(`${prefix}/auth/login`, app.controller.auth.login);
   app.post(`${prefix}/auth/logout`, app.controller.auth.logout);
   app.get(`${prefix}/spider/huibo`, app.controller.spider.huibo);
+  app.post(`${prefix}/visits/leave_msg`, app.controller.visit.newMsg);
+  app.post(`${prefix}/visits/vote`, app.controller.visit.newVote);
+  app.get(`${prefix}/visits/visit`, app.controller.visit.index);
+
 
   // public assets
   app.get("/data/index", app.controller.public.indexData);
