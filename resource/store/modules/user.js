@@ -28,12 +28,15 @@ const actions = {
 
     if (!name && !passwd) return;
     // 登录请求时提交commit
+    commit("SHOW_PATCH", { key: "cover", value: true });
     this._vm.axios.post("/auth/login", { passwd, name }).then(resp => {
       if (resp.data.code !== 200) {
         window.$Message.info(resp.data.message);
         return;
       }
       commit(types.USER_CREATE, resp.data.data);
+      commit("SHOW_PATCH", { key: "cover", value: false });
+      commit("SHOW_PATCH", { key: "loginContent", value: false });
     });
   },
   deleteUser ({ commit }) {

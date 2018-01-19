@@ -1,11 +1,13 @@
 <template>
     <div class="chat_out_content">
-        <comp-login></comp-login>
+        <comp-login ref="login"></comp-login>
         <comp-cover></comp-cover>
         <div class="chat_mian_content">
             <div class="header">
                 <span @click="friendsList" v-show="showChat">好友</span>
-                <Icon type="chevron-left" @click.native="friendsList" v-show="!showChat" class="back"></Icon>
+                <Icon type="chevron-left" @click.native="friendsList"
+                    v-show="!showChat" class="back">
+                </Icon>
                 <span style="font-size:20px">ChatRoom</span>
                 <span >{{user.name}}</span>
             </div>
@@ -26,7 +28,10 @@
                     <li v-for="u in onlineUsers">{{u.name}}</li>
                 </ul>
             </div>
-            <Input v-model="msg" icon="ios-paperplane" placeholder="输入信息" class="input" size="large" v-show="showChat">
+            <Input
+                v-model="msg" @on-click="sendMsg" @on-enter="sendMsg"
+                icon="ios-paperplane" placeholder="输入信息"
+                class="input" size="large" v-show="showChat">
             </Input>
         </div>
     </div>
@@ -34,93 +39,67 @@
 <script>
     import Login from "components/login";
     import Cover from "components/cover";
-    import io from 'socket.io-client';
-    const socket = io();
+    import { mapState } from 'vuex'
 
     export default {
         name: "App",
-        data () {
+        data() {
             return {
-                user: {},
-                showChat: true,
-                msg: "",
-                onlineUsers: [],
-                msgs: [
-                    {
-                        msg: "socket聊天室demo",
-                        type: 's'
-                    }
-                ]
+                msg: ""
             }
         },
+        computed: mapState({
+            user: state => state.user,
+            showChat: state => state.show.chat,
+            onlineUsers: state => state.chat.onlineUsers,
+            msgs: state => state.chat.msgs
+        }),
         components: {
             "comp-login": Login,
             "comp-cover": Cover
         },
         mounted () {
-            // 将user信息注入到data
-            if (!window.global.user) {
-                this.$root.$emit("LOGIN_SHOW")
-                this.$root.$emit("COVER_SHOW")
-                this.$root.$on("LOGIN_DONE", (data) =>{
-                    this.$set(this, "user", data);
+            this.$store.dispatch("createUser", {});
+
+            // 未登录用户必须先登录
+            if (!this.user.id) {
+                this.$store.commit("SHOW_PATCH", {
+                    key: "loginContent",
+                    value: true
+                });
+                this.$store.commit("SHOW_PATCH", {
+                    key: "cover",
+                    value: true
                 })
-            } else {
-                this.$set(this, "user", window.global.user);
             }
-            // 触发消息发送
-            this.$children[this.$children.length - 1].$on("on-click", () => {
-                if(this.msg === "") return this.$Message.info("请输入消息内容")
-                socket.emit('message', {
-                    userId: this.user.id,
-                    name: this.user.name,
-                    msg: this.msg
-                });
-                this.msg = "";
-            })
-            this.$children[this.$children.length - 1].$on("on-enter", () => {
-                if(this.msg === "") return this.$Message.info("请输入消息内容")
-                socket.emit('message', {
-                    userId: this.user.id,
-                    name: this.user.name,
-                    msg: this.msg
-                });
-                this.msg = "";
-            })
 
-            // 监听消息推送
-            socket.on("message", (data) => {
-                this.msgs.push({
-                    user: data.name,
-                    type: 'u',
-                    msg: data.msg
-                })
-            })
+            // 监听消息推送 - 新消息
+            this.$store.dispatch("patchMsgs");
 
-            // 监听消息推送
-            socket.on("login", (data) => {
-                this.msgs.push({
-                    type: 's',
-                    msg: `${data.name}加入了聊天`
-                })
-            })
+            // 监听消息推送 - 新用户
+            this.$store.dispatch("userJoin");
 
-            // 在线好友
-            socket.on("online_user", (data) => {
-                this.onlineUsers = [];
-                data.users.map(u => {
-                    this.onlineUsers.push(u);
-                })
-            })
+            // 监听消息推送 - 在线好友
+            this.$store.dispatch("patchOnlineUser");
         },
         methods: {
             friendsList: function() {
-                this.showChat = !this.showChat
+                this.$store.commit("SHOW_PATCH", {
+                    key: "chat",
+                    value: !this.showChat
+                });
+            },
+            sendMsg: function () {
+                this.$store.dispatch("createMsg", this.msg);
+                this.msg = "";
             }
         },
         watch: {
-            user: function (newUser) {
-                if (newUser) socket.emit('login', newUser)
+            "$store.state.user": {
+                handler: function (val, oldVal) {
+                    this.$store.dispatch("userLogin", val);
+                },
+                deep: true
             },
             msgs: function(msgs) {
                 this.$nextTick(() => {
