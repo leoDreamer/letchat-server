@@ -1,9 +1,12 @@
 const TOKEN = "access_token";
+const uuid = require("uuid");
 
 /* istanbul ignore next */
 module.exports = option => function* (next) {
-  const token = this.cookies.get(TOKEN) || this.headers[TOKEN];
+  const sid = this.cookies.get("sid") || uuid();
+  const token = this.cookies.get(TOKEN) || this.headers[TOKEN] || sid;
 
+  this.cookies.set("sid", sid);
   this.state.auth = Object.assign({ token }, this.state.auth);
   const ret = yield this.app.redis.get(`${option.prefix}:${token}`);
   if (!ret) {
