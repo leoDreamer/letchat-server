@@ -56,6 +56,16 @@
             </Timeline>
           </Card>
         </div>
+        <div style="background:#eee;padding:20px;margin-bottom:40px">
+          <Card :bordered="false" class="info">
+            <p slot="title">给我留言</p>
+            <Input v-model="leaveMsg" type="textarea" :rows="4" placeholder=" 说点什么吧..."></Input>
+            <Input v-model="connection">
+              <span slot="prepend">邮箱 / QQ</span>
+            </Input>
+            <Button type="success" long @click="sendMsg">SUBMIT</Button>
+          </Card>
+        </div>
       </Col>
     </Row>
   </div>
@@ -67,7 +77,9 @@
         data () {
           return {
               theme3: 'dark',
-              showContent: 1
+              showContent: 1,
+              leaveMsg: "",
+              connection: ""
           }
         },
         computed: {
@@ -80,6 +92,17 @@
         },
         components: {
             "page-nav": Nav
+        },
+        methods: {
+          sendMsg () {
+            if (!this.leaveMsg) return this.$Message.info("请输入留言内容.");
+            this.$store.dispatch("createLeaveMsg", {
+              msg: this.leaveMsg,
+              connection: this.connection
+            });
+            this.leaveMsg = "";
+            this.connection = "";
+          }
         }
     }
 </script>

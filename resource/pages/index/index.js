@@ -39,6 +39,7 @@ const store = new Vuex.Store(stores);
 Vue.config.debug = true;
 
 Vue.prototype.$Message = Message;
+window.$Message = Message;
 
 // init vue
 new Vue({
