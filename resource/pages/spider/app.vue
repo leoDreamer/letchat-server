@@ -18,9 +18,9 @@
                             {{originMap[origin]}}
                             <Icon type="arrow-down-b"></Icon>
                         </Button>
-                        <DropdownMenu slot="list">
-                            <DropdownItem name="huibo" @click.native="originFn('huibo')">{{originMap.huibo}}</DropdownItem>
-                            <DropdownItem name="lagou" @click.native="originFn('lagou')" disabled>{{originMap.lagou}}</DropdownItem>
+                        <DropdownMenu slot="list" @on-click="originFn">
+                            <DropdownItem name="huibo">{{originMap.huibo}}</DropdownItem>
+                            <DropdownItem name="lagou" disabled>{{originMap.lagou}}</DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
                     <Button type="primary" @click="search">搜索</Button>
@@ -43,11 +43,6 @@
                 key: "",
                 number: 20,
                 origin: "huibo",
-                spinShow: false,
-                originMap: {
-                    huibo: "汇博人才网",
-                    lagou: "拉钩"
-                },
                 columns1: [
                     {
                         title: '工作名称',
@@ -74,99 +69,24 @@
                         key: 'title'
                     }
                 ],
-                jobs: [],
-                addr: ['chongqing', 'quanbu'],
-                addrList: [{
-                    value: 'chongqing',
-                    label: '重庆',
-                    children: [
-                        {
-                            value: 'quanbu',
-                            label: '全部'
-                        },
-                        {
-                            value: 'yuzhong',
-                            label: '渝中区'
-                        },
-                        {
-                            value: 'dadukou',
-                            label: '大渡口区'
-                        },
-                        {
-                            value: 'jiangbei',
-                            label: '江北区'
-                        },
-                        {
-                            value: 'shapingban',
-                            label: '沙坪坝区'
-                        },
-                        {
-                            value: 'jiulongpo',
-                            label: '九龙坡区'
-                        },
-                        {
-                            value: 'nanan',
-                            label: '南岸区'
-                        },
-                        {
-                            value: 'yubei',
-                            label: '渝北区'
-                        },
-                        {
-                            value: 'banan',
-                            label: '巴南区'
-                        },
-                        {
-                            value: 'wanzhou',
-                            label: '万州区'
-                        },
-                        {
-                            value: 'beibei',
-                            label: '北碚区'
-                        },
-                        {
-                            value: 'shuangqiao',
-                            label: '双桥区'
-                        },
-                        {
-                            value: 'fuling',
-                            label: '涪陵区'
-                        },
-                        {
-                            value: 'qianjiang',
-                            label: '黔江区'
-                        },
-                        {
-                            value: 'changshou',
-                            label: '长寿区'
-                        },
-                        {
-                            value: 'jiangjin',
-                            label: '江津区'
-                        },
-                        {
-                            value: 'hechuan',
-                            label: '合川区'
-                        },
-                        {
-                            value: 'yongchuan',
-                            label: '永川区'
-                        },
-                        {
-                            value: 'nanchuan',
-                            label: '南川区'
-                        }
-                    ]
-                }]
+                addr: ['chongqing', 'quanbu']
             }
+        },
+        mounted () {
+            this.$store.dispatch("createIntDate");
         },
         components: {
             "page-nav": Nav
         },
+        computed: {
+            spinShow ()  { return this.$store.state.show.spin },
+            originMap () { return this.$store.state.spider.originMap },
+            jobs () { return this.$store.state.spider.jobs },
+            addrList () { return this.$store.state.spider.addrList }
+        },
         methods: {
             search () {
-                if (!this.key) this.$Message.info("请输入搜索职位");
-                this.spinShow = true;
+                if (!this.key) return this.$Message.info("请输入搜索职位");
                 let province = "", city = "";
                 this.addrList.forEach((each, index) => {
                     if (each.value === this.addr[0]) province = this.addrList[index];
@@ -175,17 +95,13 @@
                     if (each.value === this.addr[1]) city = each.label;
                 })
                 this.$Message.info(`您选择了 ${province.label}-${city} 地址查询,暂未支持该功能`);
-                this.axios.get(`/spider/huibo?key=${this.key}&number=${this.number}`)
-                    .then(resp => {
-                        this.spinShow = false;
-                        if (!resp) return;
-                        if ( resp.data.jobs.length === 0) this.$Message.info("暂未找到条件相关职位")
-                        this.jobs = resp.data.jobs;
-                        this.jobs.push({});
-                        this.jobs.pop();
-                    })
+                this.$store.dispatch("patchJobs", {
+                    key: this.key,
+                    number: this.number
+                })
             },
             originFn (origin) {
+                this.origin = origin;
             },
             rowClick (row) {
                 window.open(row.url);

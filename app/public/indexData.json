@@ -100,10 +100,98 @@
             "path": "/chat"
         }, {
             "name": "简单的职位爬虫",
-            "description": "根据职位关键字和地区搜索相应职位,已表格方式展示,并提供职位对应职位链接,目前已添加'汇博人才网'搜索,其它数据来源添加中...",
+            "description": "根据职位关键字和地区搜索相应职位,已表格方式展示,并提供职位对应职位链接,目前已添加\"汇博人才网\"搜索,其它数据来源添加中...",
             "date": "2018-1-16",
             "path": "/spider"
         }
       ]
+  },
+  "spider": {
+    "originMap": {
+        "huibo": "汇博人才网",
+        "lagou": "拉钩"
+    },
+    "addrList": [{
+        "value": "chongqing",
+        "label": "重庆",
+        "children": [
+            {
+                "value": "quanbu",
+                "label": "全部"
+            },
+            {
+                "value": "yuzhong",
+                "label": "渝中区"
+            },
+            {
+                "value": "dadukou",
+                "label": "大渡口区"
+            },
+            {
+                "value": "jiangbei",
+                "label": "江北区"
+            },
+            {
+                "value": "shapingban",
+                "label": "沙坪坝区"
+            },
+            {
+                "value": "jiulongpo",
+                "label": "九龙坡区"
+            },
+            {
+                "value": "nanan",
+                "label": "南岸区"
+            },
+            {
+                "value": "yubei",
+                "label": "渝北区"
+            },
+            {
+                "value": "banan",
+                "label": "巴南区"
+            },
+            {
+                "value": "wanzhou",
+                "label": "万州区"
+            },
+            {
+                "value": "beibei",
+                "label": "北碚区"
+            },
+            {
+                "value": "shuangqiao",
+                "label": "双桥区"
+            },
+            {
+                "value": "fuling",
+                "label": "涪陵区"
+            },
+            {
+                "value": "qianjiang",
+                "label": "黔江区"
+            },
+            {
+                "value": "changshou",
+                "label": "长寿区"
+            },
+            {
+                "value": "jiangjin",
+                "label": "江津区"
+            },
+            {
+                "value": "hechuan",
+                "label": "合川区"
+            },
+            {
+                "value": "yongchuan",
+                "label": "永川区"
+            },
+            {
+                "value": "nanchuan",
+                "label": "南川区"
+            }
+        ]
+    }]
   }
 }

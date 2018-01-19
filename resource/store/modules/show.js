@@ -4,7 +4,8 @@ const state = {
   loginTip: false,
   loginContent: false,
   cover: false,
-  chat: true
+  chat: true,
+  spin: false
 };
 
 const getters = {};

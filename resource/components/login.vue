@@ -57,9 +57,10 @@
         handleSubmit(name) {
           this.$refs[name].validate((valid) => {
               if (!valid) return;
-              this.$store.dispatch("createUser", { name: this.formInline.nickName, passwd: this.formInline.password });
-              this.$store.commit("SHOW_PATCH", { key: "cover", value: false });
-              this.$store.commit("SHOW_PATCH", { key: "loginContent", value: false })
+              this.$store.dispatch("createUser", {
+                name: this.formInline.nickName,
+                passwd: this.formInline.password
+              });
           })
         }
       }
