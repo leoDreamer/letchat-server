@@ -3,7 +3,7 @@ import App from "./app";
 import Vuex from "vuex";
 import Router from "vue-router";
 import { stores } from "../../store/pages/spider";
-import { routes } from "./js/router";
+import { routes } from "../../router/spider";
 import VueAxios from "vue-axios";
 import axios from "assets/axios";
 import "root/node_modules/iview/dist/styles/iview.css";

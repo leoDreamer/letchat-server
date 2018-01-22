@@ -4,7 +4,7 @@ import Router from "vue-router";
 import Vuex from "vuex";
 import VueAxios from "vue-axios";
 import axios from "assets/axios";
-import { routes } from "./js/router";
+import { routes } from "../../router";
 import { stores } from "../../store";
 import "root/node_modules/iview/dist/styles/iview.css";
 
