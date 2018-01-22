@@ -1,4 +1,4 @@
-import Index from "../app.vue";
+import Index from "../pages/spider/app.vue";
 
 const routes = [
     { path: "/", component: Index }

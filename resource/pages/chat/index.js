@@ -18,6 +18,7 @@ Vue.component("Input", Input);
 Vue.component("Button", Button);
 Vue.component("Icon", Icon);
 Vue.prototype.$Message = Message;
+window.$Message = Message;
 
 // init vuex
 const store = new Vuex.Store(stores);
