@@ -13,9 +13,12 @@
             </div>
             <div class="chat_content" id="chat_conent"  v-show="showChat">
                 <div class="content" v-for="(msg, index) in msgs" key="msg + index">
-                    <div v-if="msg.type === 'u'">
-                        <p v-bind:class="{'user_self': msg.user === user.name}">{{msg.user}} :</p>
-                        <span class="msg_content">{{msg.msg}}</span>
+                    <div v-if="msg.type === 'u'" class="words_content">
+                        <Avatar shape="square" icon="person" size="large" class="avatar"/>
+                        <div class="content_right">
+                            <p v-bind:class="{'user_self': msg.user === user.name}">{{msg.user}} :</p>
+                            <span class="msg_content">{{msg.msg}}</span>
+                        </div>
                     </div>
                     <div v-if="msg.type === 's'" class="system_msg">
                         <span>系统消息: {{msg.msg}}</span>
@@ -157,8 +160,20 @@
             background-color: #ecebeb;
             overflow-y: scroll;
             margin-left: 20px;
+            .avatar {
+                margin-right: 10px;
+            }
+            .content_right {
+                display: inline-block;
+            }
+            .content_left {
+                display: inline-block;
+            }
             .content {
                 margin: 10px 0px;
+            }
+            .words_content {
+                vertical-align: top;
             }
             .msg_content {
                 display: inline-block;
