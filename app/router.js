@@ -19,6 +19,9 @@ module.exports = app => {
   app.get("/chat", app.controller.page.index);
   app.get("/spider", app.controller.page.index);
 
+  // wechat
+  app.get("/wechat/verify", app.controller.wechat.verify);
+
   // socket
   app.io.route("login", require("./io/controller/chat").login);
   // app.io.route("disconnect", require("./io/controller/chat").logout);
