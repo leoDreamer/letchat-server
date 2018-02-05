@@ -18,6 +18,7 @@ Vue.component("Input", Input);
 Vue.component("Button", Button);
 Vue.component("Icon", Icon);
 Vue.component("Avatar", Avatar);
+// Vue.component("Sider", Sider);
 Vue.prototype.$Message = Message;
 window.$Message = Message;
 

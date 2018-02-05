@@ -1,41 +1,53 @@
 <template>
-    <div class="chat_out_content">
+    <div class="chat_wrap">
         <comp-login ref="login"></comp-login>
         <comp-cover></comp-cover>
-        <div class="chat_mian_content">
-            <div class="header">
-                <span @click="friendsList" v-show="showChat">好友</span>
-                <Icon type="chevron-left" @click.native="friendsList"
-                    v-show="!showChat" class="back">
-                </Icon>
-                <span style="font-size:20px">ChatRoom</span>
-                <span >{{user.name}}</span>
-            </div>
-            <div class="chat_content" id="chat_conent"  v-show="showChat">
-                <div class="content" v-for="(msg, index) in msgs" key="msg + index">
-                    <div v-if="msg.type === 'u'" class="words_content">
-                        <Avatar shape="square" icon="person" size="large" class="avatar"/>
-                        <div class="content_right">
-                            <p v-bind:class="{'user_self': msg.user === user.name}">{{msg.user}} :</p>
-                            <span class="msg_content">{{msg.msg}}</span>
+        <div class="chat_wrapper">
+            <Icon
+                type="navicon-round"
+                class="CWS_hidden_icon"
+                @click.native="sider"
+            />
+            <div
+                class="chat_wrapper_sider"
+                v-show="siderShow"
+                @click="sider"
+            ></div>
+            <div class="chat_wrapper_content">
+                <div class="header">
+                    <span style="font-size:20px">ChatRoom</span>
+                </div>
+                <div class="msg_content">
+                    <div class="content" v-for="(msg, index) in msgs" key="msg + index">
+                        <div v-if="msg.type === 'u'" class="words_content">
+                            <Avatar shape="square" icon="person" size="large" class="avatar"/>
+                            <div class="content_right">
+                                <p v-bind:class="{'user_self': msg.user === user.name}">{{msg.user}} :</p>
+                                <span class="msg_content">{{msg.msg}}</span>
+                            </div>
+                        </div>
+                        <div v-if="msg.type === 's'" class="system_msg">
+                            <span>系统消息: {{msg.msg}}</span>
                         </div>
                     </div>
-                    <div v-if="msg.type === 's'" class="system_msg">
-                        <span>系统消息: {{msg.msg}}</span>
+                </div>
+                <div class="input_content">
+                    <div class="tool">
+                        <Icon type="happy-outline"></Icon>
+                        <Icon type="ios-folder-outline"></Icon>
                     </div>
+                    <textarea
+                        v-model="msg"
+                        @on-click="sendMsg"
+                        @on-enter="sendMsg"
+                        icon="ios-paperplane"
+                        placeholder="输入信息"
+                        class="input"
+                        size="large"
+                        type="textarea"
+                    />
                 </div>
             </div>
-            <div class="chat_content firends_content" v-show="!showChat">
-                <ul>
-                    <li>在线总人数: {{onlineUsers.length}} 人</li>
-                    <li v-for="u in onlineUsers">{{u.name}}</li>
-                </ul>
-            </div>
-            <Input
-                v-model="msg" @on-click="sendMsg" @on-enter="sendMsg"
-                icon="ios-paperplane" placeholder="输入信息"
-                class="input" size="large" v-show="showChat">
-            </Input>
         </div>
     </div>
 </template>
@@ -48,15 +60,17 @@
         name: "App",
         data() {
             return {
-                msg: ""
+                msg: "",
+                siderShow: window.screen.width > 420
             }
         },
-        computed: mapState({
-            user: state => state.user,
-            showChat: state => state.show.chat,
-            onlineUsers: state => state.chat.onlineUsers,
-            msgs: state => state.chat.msgs
-        }),
+        computed: Object.assign({},
+            mapState({
+                user: state => state.user,
+                showChat: state => state.show.chat,
+                onlineUsers: state => state.chat.onlineUsers,
+                msgs: state => state.chat.msgs
+            }), {}),
         components: {
             "comp-login": Login,
             "comp-cover": Cover
@@ -68,11 +82,11 @@
             if (!this.user.id) {
                 this.$store.commit("SHOW_PATCH", {
                     key: "loginContent",
-                    value: true
+                    value: false
                 });
                 this.$store.commit("SHOW_PATCH", {
                     key: "cover",
-                    value: true
+                    value: false
                 })
             }
 
@@ -86,6 +100,9 @@
             this.$store.dispatch("patchOnlineUser");
         },
         methods: {
+            sider: function() {
+                this.siderShow = !this.siderShow
+            },
             friendsList: function() {
                 this.$store.commit("SHOW_PATCH", {
                     key: "chat",
@@ -112,81 +129,116 @@
         }
     }
 </script>
-<style rel="stylesheet/scss" lang="scss">
-    .chat_out_content {
-        width: 100%;
-        height: 100%;
-        background-color: #f1f1f1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+<style rel="stylesheet/scss" lang="scss" scoped>
+.chat_wrap {
+    width: 100%;
+    height: 100%;
+    background-color: #c4c5c5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .CWS_hidden_icon {
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        font-size: 30px;
     }
-    .chat_mian_content {
-        max-width: 450px;
-        max-height: 800px;
+}
+.chat_wrapper {
+    max-width: 1200px;
+    max-height: 800px;
+    width: 100%;
+    height: 100%;
+    background-color: #333;
+}
+.chat_wrapper_sider {
+    width: 300px;
+    height: 100%;
+    background-color: #2e3238;
+    float: left;
+}
+.chat_wrapper_content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    .header {
+        height: 50px;
+        line-height: 50px;
         width: 100%;
-        height: 99%;
-        background-color: #ecebeb;
-        overflow: hidden;
+        background-color: #f1f1f1;
+        text-align: center;
+    }
+    .msg_content {
+        background-color: #eeeeee;
+        flex-grow: 1;
+        width: 100%;
+        border-top: 1px solid #d6d6d6;
+        border-bottom: 1px solid #d6d6d6;
+        .content {
+            margin: 10px 0px;
+        }
+        .words_content {
+            vertical-align: top;
+        }
+        .msg_content {
+            display: inline-block;
+            padding: 4px 6px;
+            background-color: #ffffff;
+        }
+        .user_self {
+            color: blue
+        }
+        .system_msg {
+            text-align: center;
+            color: red;
+        }
+    }
+    .input_content {
+        width: 100%;
+        background-color: aqua;
         display: flex;
         flex-direction: column;
-        .header{
+        .tool {
+            background-color: #fff;
             width: 100%;
-            padding: 10px 10px;
-            background-color: #3a3838;
-            color: #ffffff;
-            display: flex;
-            justify-content: space-between;
-            user-select: none;
-            span {
-                line-height: 20px;
+            padding-left: 20px;
+            i {
+                margin-right: 6px;
             }
-            .back {
-                line-height: 20px;
-                width: 20px;
-            }
+
         }
-        .firends_content{
-            text-align: center;
-            li {
-                line-height: 30px;
-                border-bottom: 1px solid #dad4d4;
-            }
-        }
-        .chat_content {
+        .input {
             width: 100%;
             flex-grow: 1;
-            padding: 20px 20px 20px 0px;
-            background-color: #ecebeb;
-            overflow-y: scroll;
-            margin-left: 20px;
-            .avatar {
-                margin-right: 10px;
-            }
-            .content_right {
-                display: inline-block;
-            }
-            .content_left {
-                display: inline-block;
-            }
-            .content {
-                margin: 10px 0px;
-            }
-            .words_content {
-                vertical-align: top;
-            }
-            .msg_content {
-                display: inline-block;
-                padding: 4px 6px;
-                background-color: #ffffff;
-            }
-            .user_self {
-                color: blue
-            }
-            .system_msg {
-                text-align: center;
-                color: red;
-            }
+            border: 0px;
+            padding: 10px
         }
     }
+}
+@media (min-width: 420px) {
+    .CWS_hidden_icon {
+        display: none;
+    }
+    .input_content {
+        height: 100px;
+    }
+    .input_content.input {
+        height: 40px;
+        font-size: 30px;
+        line-height: 40px;
+    }
+}
+@media (max-width: 420px) {
+    .CWS_hidden_icon {
+        display: inline-block;
+    }
+    .input_content {
+        height: 100px;
+    }
+    .input_content.input {
+        height: 20px;
+        line-height: 20px;
+        font-size: 16px;
+    }
+}
 </style>
