@@ -86,5 +86,11 @@ module.exports = appInfo => {
     redis: config.redis
   };
 
+  config.wechat = {
+    appid: "wx4ae8afb75985097f",
+    token: "leohandsone",
+    key: "b5141c0eb3985d4f7ded0982b5c6f3b0"
+  };
+
   return config;
 };
