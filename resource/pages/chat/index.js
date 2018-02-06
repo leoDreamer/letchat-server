@@ -11,12 +11,14 @@ Vue.use(Vuex);
 Vue.use(VueAxios, axios);
 
 // 按需引入iview组件
-import { Button, Form, Input, Icon, Message } from "iview";
+import { Button, Form, Input, Icon, Message, Avatar, Badge } from "iview";
 Vue.component("Form", Form);
 Vue.component("FormItem", Form.Item);
 Vue.component("Input", Input);
 Vue.component("Button", Button);
 Vue.component("Icon", Icon);
+Vue.component("Avatar", Avatar);
+Vue.component("Badge", Badge);
 Vue.prototype.$Message = Message;
 window.$Message = Message;
 
