@@ -59,11 +59,19 @@
         <div style="background:#eee;padding:20px;margin-bottom:40px">
           <Card :bordered="false" class="info">
             <p slot="title">给我留言</p>
-            <Input v-model="leaveMsg" type="textarea" :rows="4" placeholder=" 说点什么吧..."></Input>
-            <Input v-model="connection">
-              <span slot="prepend">邮箱 / QQ</span>
-            </Input>
-            <Button type="success" long @click="sendMsg">SUBMIT</Button>
+            <div class="info_sub new_msg">
+              <Input v-model="leaveMsg" type="textarea" :rows="4" placeholder=" 说点什么吧..."></Input>
+              <Input v-model="connection">
+                <span slot="prepend">邮箱 / QQ</span>
+              </Input>
+              <Button type="success" long @click="sendMsg">SUBMIT</Button>
+            </div>
+            <div class="info_sub show_msg">
+              <p v-for="msg in msgs">
+                <span class="show_msg_user">{{"匿名"}}: </span>
+                <span>{{msg.msg}}</span>
+              </p>
+            </div>
           </Card>
         </div>
       </Col>
@@ -79,8 +87,11 @@
               theme3: 'dark',
               showContent: 1,
               leaveMsg: "",
-              connection: ""
+              connection: "不告诉你"
           }
+        },
+        mounted () {
+          this.$store.dispatch("fetchLeaveMsgs")
         },
         computed: {
           skill () {
@@ -88,6 +99,9 @@
           },
           experience () {
             return this.$store.state.information.introduce.experiences;
+          },
+          msgs () {
+            return this.$store.state.information.leaveMsgs;
           }
         },
         components: {
@@ -139,6 +153,21 @@
             line-height: 30px;
           }
         }
+      }
+      .info_sub {
+        display: inline-block;
+        width: 49%;
+      }
+      .show_msg {
+        padding: 10px 10px;
+        height: 160px;
+        overflow: auto;
+        p {
+          padding: 2px 0px;
+        }
+      }
+      .show_msg_user {
+        color: dimgray;
       }
     }
 </style>

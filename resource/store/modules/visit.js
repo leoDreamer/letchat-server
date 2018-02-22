@@ -42,8 +42,10 @@ const actions = {
       });
   },
   createLeaveMsg ({ commit }, { msg, connection }) {
+    const _self = this;
     this._vm.axios.post("/visits/leave_msg", { msg, connection })
-      .then(() => {
+      .then(resp => {
+        _self.commit(types.INFORMATION_LEAVEMSG, [resp.data.data]);
         window.$Message.info("留言成功, 感谢给予宝贵意见.");
       });
   }

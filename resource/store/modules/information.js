@@ -6,7 +6,8 @@ const state = {
   introduce: {
     skills: [],
     experiences: []
-  }
+  },
+  leaveMsgs: []
 };
 
 const getters = {};
@@ -17,6 +18,9 @@ const mutations = {
     state.introduce.experiences.push(...information.experiences);
     state.projects.push(...information.projects);
     state.blogs.push(...information.blogs);
+  },
+  [types.INFORMATION_LEAVEMSG] (state, msgs) {
+    state.leaveMsgs.unshift(...msgs);
   }
 };
 
@@ -30,6 +34,12 @@ const actions = {
             projects: data.projects,
             blogs: resp.data.data.blogs
         });
+    });
+  },
+  fetchLeaveMsgs ({ commit }) {
+    this._vm.axios.get("/visits/leave_msg").then(resp => {
+      const data = resp.data.data.msgs;
+      commit(types.INFORMATION_LEAVEMSG, data);
     });
   }
 };
