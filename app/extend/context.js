@@ -43,14 +43,14 @@ module.exports = {
 
     // 登录权限验证
     authPermission() {
-        const { ctx } = this;
-        ctx.assert(ctx.stats.auth.user, 403);
+        const ctx = this;
+        ctx.assert(ctx.state.auth.user, 403);
     },
 
     // 管理员权限验证
     adminPermission() {
-        const { ctx } = this;
-        ctx.assert(ctx.stats.auth.user, 403);
-        ctx.assert.equal(ctx.stats.auth.user.role, 1, 403);
+        const ctx = this;
+        ctx.assert(ctx.state.auth.user, 403);
+        ctx.assert.equal(ctx.state.auth.user.role, 1, 403);
     }
 };

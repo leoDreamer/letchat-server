@@ -7,6 +7,8 @@ module.exports = app => {
   app.post(`${prefix}/auth/logout`, app.controller.auth.logout);
   app.get(`${prefix}/spider/huibo`, app.controller.spider.huibo);
   app.post(`${prefix}/visits/leave_msg`, app.controller.visit.newMsg);
+  app.get(`${prefix}/visits/leave_msg`, app.controller.visit.leaveMsg);
+  app.delete(`${prefix}/visits/leave_msg`, app.controller.visit.destroy);
   app.post(`${prefix}/visits/vote`, app.controller.visit.newVote);
   app.get(`${prefix}/visits/visit`, app.controller.visit.index);
 
