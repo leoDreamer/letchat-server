@@ -1,10 +1,6 @@
 module.exports = app => {
-  const { STRING, INTEGER, DATE, UUID, UUIDV1, BOOLEAN } = app.Sequelize;
+  const { STRING, INTEGER, UUID, UUIDV1 } = app.Sequelize;
   const User = app.model.define("user", {
-    login: {
-      type: BOOLEAN,
-      default: false
-    },
     id: {
       type: UUID,
       defaultValue: UUIDV1,
@@ -21,13 +17,15 @@ module.exports = app => {
       allowNull: false,
       unique: true
     },
-    created_at: DATE,
-    updated_at: DATE
+    number: {
+      type: INTEGER(32),
+      autoIncrement: true,
+      unique: true
+    },
+    avator: UUID
+  }, {
+    initialAutoIncrement: "1000"
   });
-
-  User.prototype.logSignin = async function () {
-    await this.update({ last_sign_in_at: new Date() });
-  };
 
   return User;
 };
