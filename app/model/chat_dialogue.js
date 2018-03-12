@@ -1,5 +1,5 @@
 module.exports = app => {
-  const { UUID, UUIDV1 } = app.Sequelize;
+  const { UUID, UUIDV1, DATE } = app.Sequelize;
   const ChatDialogue = app.model.define("chat_dialogue", {
     id: {
       type: UUID,
@@ -7,11 +7,12 @@ module.exports = app => {
       primaryKey : true,
       unique : true
     },
-    user: UUID
+    last_update_at: DATE
   });
 
   ChatDialogue.associate = function () {
-    app.model.ChatDialogue.belongsTo(app.model.User, { foreignKey: "user" });
+    ChatDialogue.belongsTo(app.model.User, { foreignKey: "user_id" });
+    ChatDialogue.belongsTo(app.model.User, { foreignKey: "target_id" });
   };
 
   return ChatDialogue;

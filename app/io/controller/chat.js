@@ -15,6 +15,6 @@ exports.logout = async function() {
 };
 
 exports.message = async function() {
-  const message = this.args[0];
+  const { message } = this.args[0];
   this.app.io.emit("message", message);
 };

@@ -15,7 +15,7 @@
             >
                 <div class="CWS_avator">
                     <Avatar shape="square" icon="person" size="large" />
-                    <span>Leo_李川</span>
+                    <span>{{user.nick_name || user.name}}</span>
                 </div>
                 <Input
                     v-model="search"
@@ -130,16 +130,7 @@
                     dot: []
                 },
                 selectChatIndex: '',
-                selectFirendIndex: '',
-                firends: [
-                    {
-                        name: "Leo_李川"
-                    }, {
-                        name: "鑫儿"
-                    }, {
-                        name: "喜悦"
-                    }
-                ]
+                selectFirendIndex: ''
             }
         },
         computed: Object.assign({},
@@ -147,7 +138,9 @@
                 user: state => state.user,
                 showChat: state => state.show.chat,
                 onlineUsers: state => state.chat.onlineUsers,
-                msgs: state => state.chat.msgs
+                msgs: state => state.chat.msgs,
+                firends: state => state.chat.firends,
+                chatList: state => state.chat.chatList
             }), {}),
         components: {
             "comp-login": Login,
@@ -155,6 +148,7 @@
         },
         mounted () {
             this.$store.dispatch("createUser", {});
+            this.$store.dispatch("fetchFirends", this.user.id)
 
             // 未登录用户必须先登录
             if (!this.user.id) {
@@ -193,6 +187,7 @@
                         break;
                     case "firend":
                         this.selectFirendIndex = val;
+                        const clickedFirendId = this.firends[val]
                         break;
                     default:
                         break;

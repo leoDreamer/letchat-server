@@ -10,6 +10,12 @@ module.exports = app => {
   app.post(`${prefix}/visits/vote`, app.controller.visit.newVote);
   app.get(`${prefix}/visits/visit`, app.controller.visit.index);
 
+  // api-chat
+  app.get(`${prefix}/chat/fetch_dialogue`, app.controller.chat.fetchDialogues);
+  app.post(`${prefix}/chat/create_dialogue`, app.controller.chat.createDialogue);
+  app.get(`${prefix}/chat/fetch_firends`, app.controller.chat.fetchFirends);
+  app.post(`${prefix}/chat/create_firend`, app.controller.chat.createFirend);
+
 
   // public assets
   app.get("/data/index", app.controller.public.indexData);

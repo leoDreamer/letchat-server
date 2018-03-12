@@ -12,8 +12,8 @@ module.exports = app => {
   });
 
   Notification.associate = function () {
-    app.model.ChatDialogue.belongsTo(app.model.User, { foreignKey: "user" });
-    app.model.ChatDialogue.belongsTo(app.model.User, { foreignKey: "target" });
+    Notification.belongsTo(app.model.User, { foreignKey: "user_id" });
+    Notification.belongsTo(app.model.User, { foreignKey: "target_id" });
   };
 
   return Notification;

@@ -11,8 +11,8 @@ module.exports = app => {
   });
 
   ChatMsg.associate = function () {
-    app.model.ChatMsg.belongsTo(app.model.ChatDialogue, { foreignKey: "chat_id" });
-    app.model.ChatMsg.belongsTo(app.model.User, { foreignKey: "user" });
+    ChatMsg.belongsTo(app.model.ChatDialogue, { foreignKey: "chat_id" });
+    ChatMsg.belongsTo(app.model.User, { foreignKey: "user_id" });
   };
 
   return ChatMsg;

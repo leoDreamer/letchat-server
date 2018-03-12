@@ -1,5 +1,5 @@
 module.exports = app => {
-  const { UUID, UUIDV1, STRING } = app.Sequelize;
+  const { UUID, UUIDV1, STRING, BOOLEAN } = app.Sequelize;
   const ChatFirend = app.model.define("chat_firend", {
     id: {
       type: UUID,
@@ -7,12 +7,16 @@ module.exports = app => {
       primaryKey : true,
       unique : true
     },
-    nick_name: STRING(64)
+    nick_name: STRING(64),
+    agree: {
+      type: BOOLEAN,
+      defaultValue: true
+    }
   });
 
   ChatFirend.associate = function () {
-    app.model.ChatDialogue.belongsTo(app.model.User, { foreignKey: "user" });
-    app.model.ChatDialogue.belongsTo(app.model.User, { foreignKey: "target" });
+    ChatFirend.belongsTo(app.model.User, { foreignKey: "user_id" });
+    ChatFirend.belongsTo(app.model.User, { foreignKey: "target_id" });
   };
 
   return ChatFirend;
